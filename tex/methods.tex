@@ -1,12 +1,12 @@
 \section{Methods}
 
-We manually designed strategies that organisms could use to cooperate to experimentally demonstrate that the dishtiny platform selects for detectable hierarchical transitions of individuality.
+We manually designed strategies that organisms could use to cooperate to experimentally demonstrate that the DISHTINY platform selects for detectable hierarchical transitions of individuality.
 
-\subsection{dishtiny}
+\subsection{DISHTINY}
 
 \input{fig/explanatory.tex}
 
-We will begin by discussing the implementation of our artificial environment at a single hierarchicical level, then lay out how the system scales to multiple levels.
+We will begin by discussing the implementation of our artificial environment at a single hierarchical level, then lay out how the system scales to multiple levels.
 
 A single continuous-valued resource is tracked.
 When organisms accrue sufficient resource, they may choose to pay a cost of $-8$ to reproduce.
@@ -60,24 +60,34 @@ no county spans two states.
 Figure TODO depicts hierarchically nested channel states at the end of an evolutionary run.
 Zero-level channels coded by HSV value are separated by white borders and one-level channels coded by HSV hue are separated by black borders.
 
-\subsection{test organisms}
+Channel IDs enable straightforward detection an evolutionary transition of individuality.
+To recognize an evolutionary transition of individuality, we evaluate
+\begin{enumerate}
+\item Do individuals with the same channel ID share resources (e.g. cooperate)?
+\item Is there division of reproductive labor between members of the same channel (i.e. between individuals enveloped in the same-channel signaling network and those on the periphery)?
+\end{enumerate}
+
+If these conditions are met among organisms sharing the same zero-level channel, we would conclude that a first-level transition of individuality has occurred.
+Likewise, if these conditions are met among organisms sharing the same one-level channel, we would conclude that a second-level transition of individuality has occurred.
+
+\subsection{Organisms}
 
 We performed our experiments using organisms comprised of a set of 15 floating-point parameters.
 Each parameter describes a specific strategy component.
 On reproduction, mutation was applied to each parameter independently with probability $0.00005$.
 We will overview each strategy parameter below.
 
-Parameters $A_0$ and $A_1$ modulated same-channel reproductive competition.
+Parameters $A_0$ and $A_1$ modulate same-channel reproductive competition.
 Parameter $A_0$ is the probability an organism would to decline to replace an adjoining organism sharing the same level zero channel ID with an offspring.
 Parameter $A_1$ is the probability an organism would to decline to replace an adjoining organism sharing the same level one channel ID with an offspring.
-Mutation is performed by a redraw from the distribution $U(0.0,1.0)$.
-These parameters are limited to the range $[0,1]$.
+Mutation is performed by a redraw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
-Resource sharing was controlled by the $P_0$, $P_1$, and $P_2$ parameters.
+Resource sharing is controlled by the $P_0$, $P_1$, and $P_2$ parameters.
 The $P_0$ parameter controlled the proportion of resource collected into and activation cost paid from an organism's individual resource stockpile.
 The $P_1$ and $P_2$ parameters, respectively, controlled the proportion of resource collected into and activation cost paid from resource pools shared by organisms with identical zero-level and one-level channel IDs.
-These parameters were mutated by addition of a value drawn from $N(0.0,0.2)$ with the result clamped to the range $[0,1]$.
-The set $P_0, P_1, P_2$ was always normalized to sum to 1.
+These parameters are initialized by a draw from $U(0.0, 1.0)$.
+These parameters is mutated by addition of a value drawn from $N(0.0,0.2)$ with the result clamped to the range $[0,1]$.
+The set $P_0, P_1, P_2$ is always normalized to sum to 1.
 
 Resource pools accumulate resource just like an organism's individual stockpile, except in the case that any channel resource pool ran negative the deficit was distributed evenly between constituent organism's individual resource stockpiles.
 On every update, individuals were afforded the opportunity to spend from their individual stockpile to reproduce.
@@ -93,6 +103,7 @@ When an organism reproduces, it checks the size of its zero-level signaling netw
 If neither cap is met or exceeded, then the organism will produce an offspring sharing its zero- and one-level channel IDs.
 If only the $C_0$ cap is exceeded, then the organism will produce an offspring with new zero-level ID and identical one-level channel ID.
 Finally, if the $C_1$ cap is exceeded, then the organism will produce an offspring with new zero- and one-level channel IDs.
+These parameters are initialized by a draw from $U(0.0, 48.0)$.
 These parameters are mutated by addition of a value drawn from $N(0.0,24.0)$ with the result clamped to be non-negative.
 
 Parameters $E_0$, $E_1$, and $E_2$ control the amount of resource endowed to offspring.
@@ -102,35 +113,44 @@ Specifically, $E_0$ is the endowment amount paid to an offspring that shares the
 $E_1$ is the endowment amount paid to an offspring that shares just the one-level channel ID of the parent;
 and $E_2$ is the endowment amount paid to an offspring that shares neither the zero- nor the one-level channel ID of the parent.
 Endowed resource helps new-channel propagules to rapidly grow their signaling network in order to begin collecting resource at a rate competitive with other well-established signaling networks.
+These parameters are initialized by a draw from $U(0.0, 3.0)$.
 These parameters are mutated by addition of a value drawn from $N(0.0,10.0)$ with the result clamped to be non-negative.
 
 Parameters $M_0$, $M_1$, and $M_2$ control the attempt of suicide on genetic damage.
-Each time that an offsprig
-$M_0, M_1, M_2$
-damage-suicide
+Each time that a mutation occurs during reproduction, the mutated offspring attempts suicide with probability $M_0$ if it shares the zero- and one-level channel ID of its parent, probability $M_1$ if it shares just the one-level channel ID of its parent, and probability $M_2$ if it shares neither the zero- nor the one-level channel ID of the parent.
+The $M_x$ value referenced is from the offspring's genotype after mutation.
+Attempted suicide succeeds with a probability of $0.8$.
+This capacity enables first- or second-level individuals to combat somatic mutation.
+Initialization and mutation each of these parameters is performed by a redraw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
-$S_0, S_1$
-sort-off
+Finally, parameters $S_0$ and $S_1$ affect offspring placement.
+If an organism is placing an offspring with identical zero- and one-level channel ID, the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's zero-level same-channel signaling network.
+If an organism is placing an offspring with identical one-level channel ID but different one-level channel ID, the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's one-level same-channel signaling network.
+Otherwise, the four possible sites for offspring placement are considered in a shuffled order.
+These parameters were included to enable more exacting control of
+Initialization and mutation is performed by a draw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
+\subsection{Experiments}
 
-We would expect a zero-level individual to exhibit a genotype along the lines of
+We began by performing experiments to assess the evolutionary trajectories of populations of organisms in the DISHTINY environment.
+Every tile on the toroidal grid was seeded with a randomly-initialized organism.
+Then, the simulation was stepped forward $2 \times 10^{10}$ updates with mutation enabled.
+We performed 33 replications of this experiment.
 
-describe
+Under this, we observed evolutionary outcomes that resembled zero-, first-, and second-level individuality.
+To assess the relative fitness of these evolved organisms, we ran ecological competitions between three genotypes --- one selected as the most common genotype from the evolutionary run where the greatest mean $P_0$ was observed, one selected as the most common genotype from the evolutionary run where the greatest mean $P_1$ was observed, and the other selected as the most common genotype from the evolutionary run where the greatest mean $P_2$ was observed.
+Each ecological run was seeded with three copies of each genotype.
+Seeded genotypes were uniformly spaced over the toroidal grid with random arrangement.
+Then, the simulation was stepped forward  $2 \times 10^{9}$ updates with mutation disabled.
+We performed 191 replications of this experiment.
 
-We would expect a first-level individual to exhibit a genotype along the lines of
+All experiments were performed using a  $120 \times 120$ toroidal grid layout.
 
-describe
+\subsection{Implementation}
 
+Runtime for evolutionary experiments was approximately 60 hours.
+Runtime for ecological experiments was approximately 6 hours.
 
-
-We would expect a second-level individual to exhibit a genotype along the lines of
-
-describe
-
-\subsection{implementation}
-
-Our experiments
-code is available here \url{https://github.com/mmore500/dishtiny}
-Empirical library
-
-data and visualizations are available here \url{https://osf.io/ewvg8/}
+Our experimental system was implemented using the Empirical library for scientific software development in C++ [TODOCITE].
+The code used to perform and analyze our experiments is available at \url{https://github.com/mmore500/dishtiny}.
+Our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/ewvg8/}.
