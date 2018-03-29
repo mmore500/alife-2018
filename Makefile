@@ -20,7 +20,6 @@ ${BUILD_DIR}-draft.pdf: main.tex
 clean:
 	rm -f ${BUILD_DIR}.pdf
 	rm -f ${BUILD_DIR}-draft.pdf
-	rm -f ${BUILD_DIR}*
 
 cleaner:
 	latexmk -CA
