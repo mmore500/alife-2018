@@ -1,21 +1,31 @@
 \section{Conclusion}
 
-Summarize transition of individuality
-  * reproductive division of labor --- edges
-  * pooling resources to endow a propagule with lots of resources
-  * potentially catastrophic somatic mutations ameliorated through suicide
+Using simple organisms that evolve parameters for a set of manually-designed strategies, we have demonstrated that DISHTINY environment selects for genotypes that exhibit high-level individuality.
+We observed zero-, first-, and second- level individuality among evolutionary outcomes.
+Specifically, we observed
+\begin{enumerate}
+  \item division of reproductive labor between members of the same channel (i.e. between individuals enveloped in a same-channel signaling network and those on the periphery), and
+  \item cooperation between members of the same channel (i.e. pooling of resource on the same-channel signaling networks).
+\end{enumerate}
 
-scaling in time and space
-decentralized! arbitrarily parallelized?
+Ecological trials revealed that second-level individuals outcompete first- and zero-level individuals.
+Interestingly, employment of strategies to combat somatic mutation through apoptosis was correlated with second-level individuality.
+We observed that the magnitude of resource endowment for propagules was also correlated with second-level individuality.
 
-complexity of an organism versus parallelization of a population
+Although shifts in individuality coincident with the both the zero- and the one-level signaling network were both clearly observed, the question of whether these transitions were truly hierarchical in nature is debatable.
+That is, it is not clear whether first-level individuality was to some extent preserved in or necessary for the emergence of second-level individuality.
+Given the nature of the manually-designed strategies for resource-pooling and reproductive division of labor, second-level resource pooling and division of labor could readily leapfrog over first-level resource pooling and division of labor and, in many ways, seemed to completely supersede those first-level efforts.
 
+We believe that this is a shortcoming of the design of organisms employed in these experiments, not the DISHTINY environment itself.
+We have nevertheless clearly demonstrated that the DISHTINY environment ultimately selects for high-level individuality.
+We are eager to work with more sophisticated cells capable of arbitrary computation via genetic programming in order to pursue truly open-ended evolutionary experiments.
+Such work will provide valuable insight into scientific questions relating to major evolutionary transitions such as the role of pre-existing phenotypic plasticity, pre-existing environmental interactions, and how transitions relate to increases in organizational, structural, and functional complexity.
 
-our evolving organisms are not open-ended
-simply evolving parameters for some rather crude manually-designed strategies
-while sufficient to demonstrate that the environment selects for genetic strategies that program for higher-level individuality, these results are not full-fledged
-but they show potential for it and that's our next step
-
-briefly, how to integrate open-ended organisms into dishtiny
-
-also, study major transitions --- questions about phenotypic plasticity, etc. (look at grant proposal)
+We believe that such an approach also provides a unique opportunity to fundamentally further the ambition of the field of Artificial life with respect to open-ended evolution.
+Key to this ambition is scale.
+The DISHTINY environment near-trivially scales to select for an arbitrary number of hierarchical levels of individuality (not just the two hierarchical levels explored in these experiments).
+Importantly, the environment is implemented in a near-completely decentralized manner.
+This means that parallelization might be realized --- ultimately, perhaps on the level of the individual toroidal grid tile --- such that per-update run time can nearly remain constant whatever the area of the toroidal grid.
+Parallel computing is widely exploited in evolutionary computing, where subpopulations are farmed out to individual compute nodes for for periods of isolated evolution or single genotypes are farmed out to individual compute nodes for fitness evaluation.
+The DISHTINY platform presents a more fundamental parallelization potential: principled parallelization of the evolving individual phenotype at arbitrary scale (i.e. a high-level individual as a large collection of individul cells on the toroidal grid).
+Such parallelization will be key to realizing systems with complexity or scale approaching those of biological systems, to realizing the ambitions of the field of Artificial life.
