@@ -1,10 +1,6 @@
-\section{Results}
-
-\subsection{Evolutionary Outcomes}
+\section{Results and Discussion}
 
 \input{fig/genotypes.tex}
-
-\subsection{Evolutionary Outcomes}
 
 \input{fig/outcome_grids.tex}
 
@@ -16,19 +12,50 @@
 
 \input{fig/endowment.tex}
 
-trajectory of evolutionary genetic paths
 
-reproductive division of labor observed
-altruistic suicide observed
-resource sharing observed
+Zeroth-, first-, and second- level individuals were all observed at update $1.95 \times 10^{10}$ in different runs of our evolutionary simulation.
+The criteria used to discern these outcomes are described below.
+Figure \ref{fig:outcome_grids} shows the state of same-channel zero- and one-level signaling networks at the end of runs where zero-, first-, and second-level individuality evolved.
+Figure \ref{fig:grid_progression} shows a series of signaling network snapshots in an evolutionary run where second-level individuality evolved.
+Zeroth-level individuals appear to form with comparatively large zero-level signaling networks that are arranged into roughly globular one-level signaling networks.
+First-level individuals appear to form elongated cigar-shaped one-level amalgamations of diversiform zero-level networks.
+Second-level individuals appear to form highly regular diamond-shaped one- level amalgamations of diversiform zero-level networks.
 
+Figure \ref{fig:genotypes} describes predominant genotypes observed at the end of evolutionary simulation.
+With a single exception, nearly all evolved genotypes had $C_1$ fixed at or very near $1.0$.
+So, reproduction over cells sharing the same one-level channel was near-universally avoided;
+genotypes evolved so that organisms located at the interior of one-level same-channel signaling networks surrendered their ability to reproduce (at least as long as they remained at the interior of the network).
+We confirmed that reproductive abstention indeed occurred in our system as expected by directly logging it.
 
-phenotype progression
+However, a variety of resource-caching strategies evolved.
+Most-abundant genotypes at the end of evolutionary runs included strategies where resource was primarily cached in an organism's individual stockpile (i.e. $P_0 > P_1, P_2$), strategies where resource was primarily cached in an organism's zero-level signaling network's pool (i.e. $P_1 > P_0, P_2$), and strategies where resource was primarily cached in an organism's one-level signaling network's pool (i.e. $P_2 > P_0, P_1$).
+Among 33 trials, at update $1.95 \times 10^{10}$ predominant genotypes with $P_0 > P_1, P_2$ were observed in two replicates, predominant genotypes with $P_1 > P_0, P_2$ were observed in 16 replicates, and predominant genotypes with $P_2 > P_0, P_1$ were observed in 15 replicates.
+A related measure, among populations at update $1.999 \times 10^{10}$ mean $P_0 > P_1, P_2$ was observed in one replicate, mean $P_1 > P_0, P_2$ was observed in 16 replicates, and mean $P_2 > P_0, P_2$ was observed in 16 replicates.
 
-generation times
+Given the near-ubiquitous nature of cooperation with regard to reproductive division of labor at the one-level same-channel signaling network, it was on this basis of resource caching strategy that distinctions between zeroth-, first-, and second- level individuality was drawn.
+(The single predominant genotype with $C_2 = 0.90$ had $P_1 = 1.0$, so was not sharing resource on the one-level same-channel resource pool).
 
-resource harvested by time,
-  regressed on population's genetic composition
+Given that zeroth-, first-, and second-level individuals evolved, we wanted to set aside questions of evolutionary dynamics to determine which genotype was the most fit in the DISHTINY environment.
+To accomplish this, we ran ecological competitions between the the dominant genotypes from the run with greatest mean $P_0$, the run with greatest mean $P_1$, and the run with greatest mean $P_2$.
+Out of 191 trials performed, by update $1.5 \times 10^{10}$, fixation was reached.
+The zeroth-level individuality genotype was predominant in one trial, the first-level individuality genotype was predominant in 12 trials, and the second-level individuality genotype was predominant in 178 trials.
+These results suggest that in the absence of mutation, second-level individuals exhibits greater fitness than both first- and zero-th level individuals ($p < $TODO; test TODO).
 
-ecological experiments?
-  possibly not fair because somatic mutation
+In this comparison, however, higher-level individuality likely benefited from eliminated the problem of somatic mutation.
+To assess the relative fitness of first- and second-level individuals without mutation disabled, we examined the relationship between mean $P_1$ and $P_2$ at update $1.95 \times 10^{10}$ and the rate of cellular reproduction at update $1.999 \times 10^{10}$ in the 33 replicate evolutionary trials performed.
+A significant negative correlation between mean $P_1$ and cellular reproduction rate was observed ($p < $TODO; test TODO; Figure \ref{fig:mean_res_pool1_vs_net_reproduction}).
+A significant positive correlation between mean $P_2$ and cellular reproduction rate was observed ($p < $TODO; test TODO; Figure \ref{fig:mean_res_pool2_vs_net_reproduction}).
+This suggests that second-level individuals tend to collect resource more effectively than first-level individuals.
+We did not test correlation between $P_0$ and due to the small number of outcomes where elevated $P_0$ was observed.
+
+With the viability of zero-, first-, and second-level individuality in the DISHTINY environment --- and the greater relative fitness of second-level individuality --- established, we were also interested in probing the strategies employed by zero-, first-, and second-level individuals beyond resource caching and reproductive deferment.
+To assess whether higher-level individuals employed apoptosis to mitigate somatic mutation, we examined the relationship between mean $P_1$ and $P_2$ and mean $M_0$ at update $1.95 \times 10^{10}$ in the 33 replicate evolutionary trials performed.
+A significant negative correlation between mean $P_1$ and $M_0$ ($p < $TODO; test TODO; Figure \ref{fig:champion_res_pool1_vs_champion_damage_suicide0}).
+A significant positive correlation between mean $P_2$ and $M_0$ ($p < $TODO; test TODO; Figure \ref{fig:champion_res_pool2_vs_champion_damage_suicide0}).
+Notably, no genotype encoding second-level individuality was observed with $M_0 < 0.5$.
+This suggests that second-level individuals, in particular, relied on apoptosis to mitigate somatic mutation, perhaps due to their much larger scale compared to first- and zeroth-level individuals.
+
+To assess whether higher-level individuals provided propagules (offspring sharing neither the zero- nor the one-level channel ID with the parent) with larger resource endowments, we examined the relationship between mean $P_1$ and $P_2$ and mean $E_2$ at update $1.95 \times 10^{10}$ in the 33 replicate evolutionary trials performed.
+A significant negative correlation between mean $P_1$ and $E_2$ ($p < $TODO; test TODO; Figure \ref{fig:champion_res_pool1_vs_champion_endowment2}).
+A significant positive correlation between mean $P_2$ and $E_2$ ($p < $TODO; test TODO; Figure \ref{fig:champion_res_pool2_vs_champion_endowment2}).
+Notably, no genotype encoding second-level individuality was observed with $M_0 < 0.5$.
