@@ -133,14 +133,15 @@ Initialization and mutation is performed by a draw from the distribution $U(-0.5
 
 We began by performing experiments to assess the evolutionary trajectories of populations of organisms in the DISHTINY environment.
 Every tile on the toroidal grid was seeded with a randomly-initialized organism.
-Then, the simulation was stepped forward $2 \times 10^{10}$ updates with mutation enabled.
+Then, the simulation was stepped forward 20 million updates with mutation enabled.
 We performed 33 replications of this experiment.
+Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 11.3 with a standard deviation of 1.9 cellular generations per 10,000 updates.
 
 Under this, we observed evolutionary outcomes that resembled zero-, first-, and second-level individuality.
 To assess the relative fitness of these evolved organisms, we ran ecological competitions between three genotypes --- one selected as the most common genotype from the evolutionary run where the greatest mean $P_0$ was observed, one selected as the most common genotype from the evolutionary run where the greatest mean $P_1$ was observed, and the other selected as the most common genotype from the evolutionary run where the greatest mean $P_2$ was observed.
 Each ecological run was seeded with three copies of each genotype.
 Seeded genotypes were uniformly spaced over the toroidal grid with random arrangement.
-Then, the simulation was stepped forward  $2 \times 10^{9}$ updates with mutation disabled.
+Then, the simulation was stepped forward 2 million updates with mutation disabled.
 We performed 191 replications of this experiment.
 
 All experiments were performed using a  $120 \times 120$ toroidal grid layout.
@@ -150,6 +151,5 @@ All experiments were performed using a  $120 \times 120$ toroidal grid layout.
 Runtime for evolutionary experiments was approximately 60 hours.
 Runtime for ecological experiments was approximately 6 hours.
 
-Our experimental system was implemented using the Empirical library for scientific software development in C++ [TODOCITE].
-The code used to perform and analyze our experiments is available at \url{https://github.com/mmore500/dishtiny}.
-Our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/ewvg8/}.
+Our experimental system was implemented using the Empirical library for scientific software development in C++, available at \url{https://github.com/devosoft/Empirical}.
+The code used to perform and analyze our experiments, our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/ewvg8/}.
