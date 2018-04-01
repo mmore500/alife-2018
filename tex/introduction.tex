@@ -1,31 +1,22 @@
 \section{Introduction}
 
-It is the aim of artificial life research to realize engineered systems that exhibit properties of biological life in order to study them, but also with an eye towards applications such as artificial intelligence \citep{bedau2003artificial}.
-Increasing the sophistication and complexity \citep{goldsby2017increasing}.
+It is the aim of Artificial Life research to realize engineered systems that exhibit properties of biological life in order to study them, but also with an eye towards applications such as artificial intelligence \citep{bedau2003artificial}.
+Attaining increasing sophistication and complexity in an evolving system is central to this aim \citep{goldsby2017increasing}.
+This issue is often addressed in the context of ``open-ended evolution.''
+Although precise definitions and measures are not well-established, this term is generally understood to refer to systems the ceaseless production of novelty in an evolving system \citep{taylor2016open}.
+Evolutionary transitions of individuality, which are key to the complexification and diversification of biological life \citep{smith1997major}, have been highlighted as key research targets with respect to the question of open-ended evolution \citep{ray1996evolving, banzhaf2016defining}.
+In an evolutionary transition of individuality, a new, more complex replicating entity is derived from the combination of cooperating replicating entities \citep{west2015major}.
+Eusocial insects colonies and multicellular organisms exemplify this phenomenon \cite{smith1997major}.
+Like the definition of open-ended evolution, the notion of what constitutes an evolutionary individual is not entirely cut and dry; close coordination and cooperation between component entities, reproductive division of labor between component entities, reproductive bottlenecks of component entities, reproductive lineages (e.g. parent-offspring relationships) at the level of the ensemble are among criteria cited for evolutionary individuality
+\citep{ereshefsky2015rethinking, bouchard2013symbiotic}.
 
-``complexity potential''
-Open-ended evolution \citep{taylor2016open}
+In order to study evolutionary transitions of individuality, we must devise a system in which we expect such transitions to occur in a detectable manner.
+To this end, we introduce the DISHTINY (DIStributed Hierarchical Transitions of IndividualitY) platform, which seeks to achieve this goal by explicitly registering organisms in cooperating groups that coordinate spatiotemporally to maximize the harvest of a resource.
+Detecting a transition of individuality in our system boils down to observing for the presence of resource-sharing and reproductive division of labor among organisms registered to the same cooperating group.
+Our system is designed such that an arbitrary number of levels can readily be selected for and detected.
+Further, the system design is decentralized; it is amenable to massive parallelization via distributed computing.
+We believe that such scalability ---  both conceptually and with respect to implementation --- is an essential consideration in the pursuit of systems capable of generating complexity and novelty rivaling that of biological life via open-ended evolution.
 
-
-\citep{ray1996evolving}
-
-Evolutionary transitions of individuality have been identified as key to understanding the complexification and diversification of biological life \citep{smith1997major}.
-``bulk of complexity increases in major transitions.''
-ex so-called ``Cambrian explosion''
-evolutionary transitions
-\citep{west2015major}
-
-
-fraternal transition of individuality
-
-* definition
-
-* example -- social insects: hierarchical
-
-in order to we need to design a framework in which we expect such transitions to occur and, importantly, occur in a way that is straightforward to detect.
-
-To this end, we introduce the DISHTINY framework.
-seeks to achieve this by making organisms explicitly register in cooperating groups (``channels'') to cooperate spatiotemporally to maximize the harvest of a resource.
-Then, detecting transitions of individuality simply by looking for the presence of resource-sharing and reproductive division of labor among organisms sharing a channel and the absence among organisms *not* sharing a channel.
-We believe that one of the most interesting properties of our system this abstraction is organized so that it can scale to an arbitrary number of hierarchical levels.
-We see the ability to select for an arbitrary number of evolutionary transitions as an important step to achieving open-ended scale in artificial life that more closely resembles that of biological life.
+We begin by laying out the design of the DISHTINY platform.
+Then, we introduce a model organism used to test for selection for high-level individuality in DISHTINY.
+Finally, we discuss the results of ecological competition and evolutionary experiments, which demonstrate selection for --- and emergence of --- high-level individuality in DISHTINY.
