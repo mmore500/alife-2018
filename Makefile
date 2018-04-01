@@ -18,8 +18,8 @@ ${BUILD_DIR}-draft.pdf: main.tex
     -pdflatex="pdflatex -interaction=nonstopmode" draft.tex
 
 clean:
-	rm ${BUILD_DIR}.pdf
-	rm ${BUILD_DIR}-draft.pdf
+	rm -f ${BUILD_DIR}.pdf
+	rm -f ${BUILD_DIR}-draft.pdf
 
 cleaner:
 	latexmk -CA

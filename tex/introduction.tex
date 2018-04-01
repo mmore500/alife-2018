@@ -1,34 +1,22 @@
 \section{Introduction}
 
-Power law distributions in Nature usually signal the absence of a
-scale in the region where the scaling is observed, and sometimes point
-to critical dynamics. In Self-Organized-Criticality (SOC)
-\citep{BTW87,BTW88}, for example, power law distributions reveal the
-dynamics of an unstable critical point, brought about by slow driving
-and a feed-back mechanism between order parameter and critical
-parameter.  The critical dynamics is usually described within the
-language of second-order phase transitions in condensed matter systems
-\citep{SJD}, but it can be shown that SOC-type behavior also occurs
-within a dual description in terms of the Landau-Ginzburg equation as
-{\em first-order} transitions \citep{GS}.  Indeed, it was shown that a
-power law distribution of {\em epoch-lengths}, that is, the time a
-particular species dominates the dynamics of an adapting population,
-is explained by a self-organized critical scenario \citep{CA2} that
-carries the hallmark of first-order phase transitions. Here, we
-measure the distribution of abundances of {\em species} and genotypes
-in an artificial chemistry, \citep[the Avida Artificial Life
-system][]{AB1,OBA} and show that the distribution is scale-free under
-a broad class of circumstances, confirming the results reported in
-\citep{CA2}.  In the next section, we discuss the first-order dynamics
-in more detail and examine ``avalanches of invention'' from the point
-of view of a thermodynamics of information. In Section III, we measure
-the critical exponent of the power law of genotype abundances in the
-limit of infinitesimal driving, i.e., infinitesimal mutation rate, and
-discuss the role of the fitness landscape in shaping the
-distribution. In Section IV, we repeat the analysis for a higher
-taxonomic level (that of species) and discuss its relation to the
-geometric distributions found by \citet{BUR90,BUR93}.
-Conclusions about the evolutionary process drawn from the data
-obtained in this paper are presented in Section V.
+It is the aim of Artificial Life research to realize engineered systems that exhibit properties of biological life in order to study them, but also with an eye towards applications such as artificial intelligence \citep{bedau2003artificial}.
+Attaining increasing sophistication and complexity in an evolving system is central to this aim \citep{goldsby2017increasing}.
+This issue is often addressed in the context of ``open-ended evolution.''
+Although precise definitions and measures are not well-established, this term is generally understood to refer to systems the ceaseless production of novelty in an evolving system \citep{taylor2016open}.
+Evolutionary transitions of individuality, which are key to the complexification and diversification of biological life \citep{smith1997major}, have been highlighted as key research targets with respect to the question of open-ended evolution \citep{ray1996evolving, banzhaf2016defining}.
+In an evolutionary transition of individuality, a new, more complex replicating entity is derived from the combination of cooperating replicating entities \citep{west2015major}.
+Eusocial insects colonies and multicellular organisms exemplify this phenomenon \cite{smith1997major}.
+Like the definition of open-ended evolution, the notion of what constitutes an evolutionary individual is not entirely cut and dry; close coordination and cooperation between component entities, reproductive division of labor between component entities, reproductive bottlenecks of component entities, reproductive lineages (e.g. parent-offspring relationships) at the level of the ensemble are among criteria cited for evolutionary individuality
+\citep{ereshefsky2015rethinking, bouchard2013symbiotic}.
 
-\input{fig/example.tex}
+In order to study evolutionary transitions of individuality, we must devise a system in which we expect such transitions to occur in a detectable manner.
+To this end, we introduce the DISHTINY (DIStributed Hierarchical Transitions of IndividualitY) platform, which seeks to achieve this goal by explicitly registering organisms in cooperating groups that coordinate spatiotemporally to maximize the harvest of a resource.
+Detecting a transition of individuality in DISHTINY boils down to observing for the presence of resource-sharing and reproductive division of labor among organisms registered to the same cooperating group.
+Our system is designed such that hierarchiical transitions across an arbitrary number of levels of individuality can be selected for and detected.
+Further, DISHTINY is decentralized; it is amenable to massive parallelization via distributed computing.
+We believe that such scalability --- with respect to both concept and implementation --- is an essential consideration in the pursuit of artificial systems capable of generating complexity and novelty rivaling that of biological life via open-ended evolution.
+
+We begin by laying out the design of the DISHTINY platform.
+Then, we introduce a model organism used to test for selection for high-level individuality in DISHTINY.
+Finally, we discuss the results of ecological competition and evolutionary experiments, which demonstrate selection for --- and emergence of --- high-level individuality in DISHTINY.
