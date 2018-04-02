@@ -97,10 +97,10 @@ On reproduction, mutation was applied to each parameter independently with proba
 The altruism parameters ($A_0$ and $A_1$) control the probability that an organism declines to replace an adjoining organism that shares the same level-zero ($A_0$) or level-one ($A_0$) channel ID with their offspring.
 Mutation is performed by a redraw from the uniform distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
-Resource pool usage is controlled by the $P_{self}$, $P_0$, and $P_1$ parameters.
-The $P_{self}$ parameter controls the proportion of resource collected into and paid from an organism's individual resource stockpile, while the $P_0$ and $P_1$ parameters, respectively, control the proportion of resources going into and out of the resource pools shared by organisms with identical level zero and level one channel IDs.
+Resource pool usage is controlled by the $P_{c}$, $P_0$, and $P_1$ parameters.
+The $P_{c}$ parameter controls the proportion of resource collected into and paid from an organism's individual resource stockpile, while the $P_0$ and $P_1$ parameters, respectively, control the proportion of resources going into and out of the resource pools shared by organisms with identical level zero and level one channel IDs.
 These parameters are initialized by a draw from $U(0.0, 1.0)$ and mutated by addition of a normal value drawn from $N(0.0,0.2)$ with the result clamped to the range $[0,1]$.
-The set $P_{self}, P_0, P_1$ is always normalized to sum to 1.
+The set $P_{c}, P_0, P_1$ is always normalized to sum to 1.
 
 Channel resource pools are identical to an organism's individual stockpile, except that any deficit is distributed evenly among the individual organisms.
 On every update, individuals can spend from their individual stockpile to reproduce
@@ -119,17 +119,17 @@ If only the $C_0$ cap is exceeded, then the organism will produce an offspring w
 Finally, if the $C_1$ cap is exceeded, then the organism will produce an offspring with new IDs for both channels.
 These parameters are initialized by a draw from $U(0.0, 48.0)$ and mutated by adding a value drawn from $N(0.0,24.0)$ with the result clamped to be non-negative.
 
-The endowment arameters $E_{self}$, $E_0$, and $E_1$ control the amount of resource provided to offspring.
+The endowment arameters $E_{c}$, $E_0$, and $E_1$ control the amount of resource provided to offspring.
 This endowment is paid as an additional cost by the cell stockpile (or same-channel resource pool) funding a reproduction.
-The full amount of the endowment is divided between the offspring's stockpile, level zero same-channel resource pool, and level one same-channel resource pool according to the offspring's parameters $P_{self}$, $P_0$, and $P_1$.
-Specifically, $E_{self}$ is the endowment amount paid to an offspring that shares the both channel ID of the parent;
+The full amount of the endowment is divided between the offspring's stockpile, level zero same-channel resource pool, and level one same-channel resource pool according to the offspring's parameters $P_{c}$, $P_0$, and $P_1$.
+Specifically, $E_{c}$ is the endowment amount paid to an offspring that shares the both channel ID of the parent;
 $E_0$ is the endowment paid to an offspring that shares just the level one channel ID of the parent;
 and $E_1$ is the endowment paid to an offspring that shares neither the level-zero nor level-one channel ID of the parent.
 Endowed resources help new-channel propagules to rapidly grow their signaling network in order to begin collecting resource at a competitive rate to other well-established signaling networks.
 These parameters are initialized by a draw from $U(0.0, 3.0)$ and are mutated by addition of a value drawn from $N(0.0,10.0)$ with the result clamped to be non-negative.
 
-Parameters $M_{self}$, $M_0$, and $M_1$ control the attempt of suicide on genetic damage.
-Each time that a mutation occurs during reproduction, the mutated offspring attempts suicide with probability $M_{self}$ if it shares both channel IDs of its parent, probability $M_0$ if it shares just the level one channel ID of its parent, and probability $M_1$ if it shares neither channel ID of the parent.
+Parameters $M_{c}$, $M_0$, and $M_1$ control the attempt of suicide on genetic damage.
+Each time that a mutation occurs during reproduction, the mutated offspring attempts suicide with probability $M_{c}$ if it shares both channel IDs of its parent, probability $M_0$ if it shares just the level one channel ID of its parent, and probability $M_1$ if it shares neither channel ID of the parent.
 The $M_x$ value applied is from the offspring's genotype after mutation.
 Attempted suicide succeeds %with a probability of $0.8$.
 80\% of the time.
@@ -152,7 +152,7 @@ We performed 33 replications of this experiment, each taking approximately 60 ho
 Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 11.3 with a standard deviation of 1.9 cellular generations per 10,000 updates.
 
 We observed evolutionary outcomes that resembled zero-, first-, and second-level individuality.
-To assess the relative fitness of these evolved organisms, we ran ecological competitions between three genotypes --- one selected as the most common genotype from the evolutionary run where the greatest mean $P_{self}$ was observed, one selected as the most common genotype from the evolutionary run where the greatest mean $P_0$ was observed, and the other selected as the most common genotype from the evolutionary run where the greatest mean $P_1$ was observed.
+To assess the relative fitness of these evolved organisms, we ran ecological competitions between three genotypes --- one selected as the most common genotype from the evolutionary run where the greatest mean $P_{c}$ was observed, one selected as the most common genotype from the evolutionary run where the greatest mean $P_0$ was observed, and the other selected as the most common genotype from the evolutionary run where the greatest mean $P_1$ was observed.
 We seeded each ecological run with three copies of each genotype, uniformly spaced over the toroidal grid with random arrangement. We ran these competitions for 2 million updates with mutation disabled.
 We performed 191 replications of this experiment, each taking approximately 6 hours.
 
