@@ -28,19 +28,19 @@ genotypes evolved so that organisms surrendered their ability to reproduce when 
 %We confirmed that reproductive abstention indeed occurred in our system as expected by directly logging it.
 
 However, a variety of resource-caching strategies evolved.
-Most-abundant genotypes at the end of evolutionary runs included strategies where resource was primarily cached in an organism's individual stockpile (i.e. $P_{self} > P_0, P_1$), strategies where resource was primarily cached in an organism's level-zero signaling network's pool (i.e. $P_0 > P_{self}, P_1$), and strategies where resource was primarily cached in an organism's level-one signaling network's pool (i.e. $P_1 > P_{self}, P_0$).
+Most-abundant genotypes at the end of evolutionary runs included strategies where resource was primarily cached in an organism's individual stockpile (i.e. $P_{c} > P_0, P_1$), strategies where resource was primarily cached in an organism's level-zero signaling network's pool (i.e. $P_0 > P_{c}, P_1$), and strategies where resource was primarily cached in an organism's level-one signaling network's pool (i.e. $P_1 > P_{c}, P_0$).
 % Should we change each of the >'s above into >> to indicate MUCH greater than?  As long as it's true from SOME runs, it doesn't need to be frequent.
-%Among 33 trials, at update 19.5 million predominant genotypes with $P_{self} > P_0, P_1$ were observed in two replicates, predominant genotypes with $P_0 > P_{self}, P_1$ were observed in 16 replicates, and predominant genotypes with $P_1 > P_{self}, P_0$ were observed in 15 replicates.
+%Among 33 trials, at update 19.5 million predominant genotypes with $P_{c} > P_0, P_1$ were observed in two replicates, predominant genotypes with $P_0 > P_{c}, P_1$ were observed in 16 replicates, and predominant genotypes with $P_1 > P_{c}, P_0$ were observed in 15 replicates.
 Among 33 trials, selfish low-level individuals dominated by the end of two replicates, level-zero resource-sharing dominated in 16 replicates, and level-one resource sharing dominated in 15 replicates.
 %@CAO: I think the above will be easier for readers to digest.  I'm not sure why you focused on 19.5 million (I'm assuming it has to do with data collection), but I think it's a fine point to count as "by the end"  I also wouldn't include the below since it's basically the same timepoint; you could just update the numbers above to 1,16,16 if you want.
-%A related measure, among populations at update 19.99 million mean $P_{self} > P_0, P_1$ was observed in one replicate, mean $P_0 > P_{self}, P_1$ was observed in 16 replicates, and mean $P_1 > P_{self}, P_1$ was observed in 16 replicates.
+%A related measure, among populations at update 19.99 million mean $P_{c} > P_0, P_1$ was observed in one replicate, mean $P_0 > P_{c}, P_1$ was observed in 16 replicates, and mean $P_1 > P_{c}, P_1$ was observed in 16 replicates.
 
 Given the near-ubiquitous nature of cooperation with regard to reproductive division of labor at the level one same-channel signaling network, it was on this basis of resource caching strategy that distinctions between zeroth-, first-, and second- level individuality was drawn.
 (The single predominant genotype with $A_1 = 0.91$ had $P_0 = 1.0$, so was not sharing resource on the level one same-channel resource pool).
 % @CAO: I'm not sure where this final parenthetical came from.  I take it this is the single "selfish" individual in the second example above?
 
 Next, we wanted to compare zeroth-, first-, and second-level individuals to determine which genotype was the most fit in the DISHTINY environment.
-We ran ecological competitions between the the dominant genotypes from the run with greatest mean $P_{self}$, the run with greatest mean $P_0$, and the run with greatest mean $P_1$.
+We ran ecological competitions between the the dominant genotypes from the run with greatest mean $P_{c}$, the run with greatest mean $P_0$, and the run with greatest mean $P_1$.
 Out of 191 trials performed, by update 1.5 million, fixation was reached.  % @CAO: Should this be "a single genotype fixed in each case." or something along those lines?
 The zeroth-level individuality genotype dominated in one trial, the first-level individuality genotype dominated in 12 trials, and the second-level individuality genotype dominated in 178 trials.
 These results suggest that in the absence of mutation, second-level individuals tend to exhibit greater fitness than first- and zero-th level individuals ($p < 0.0001$; RR 2.8; two-tailed exact test).
@@ -49,12 +49,12 @@ In this comparison, however, higher-level individuality likely benefited from el
 To assess the relative fitness of first- and second-level individuals without mutation disabled, we examined the relationship between mean $P_0$ and $P_1$ and the rate of cellular reproduction at the end of each of the 33 replicate evolutionary trials performed.
 We observed a significant negative correlation between mean $P_0$ and cellular reproduction rate ($p < 0.0001$; bootstrap test; Figure \ref{fig:mean_res_pool1_vs_net_reproduction}) and a significant positive correlation between mean $P_1$ and cellular reproduction rate ($p < 0.0001$; bootstrap test; Figure \ref{fig:mean_res_pool2_vs_net_reproduction}).
 This result suggests that second-level individuals tend to collect resource more effectively than first-level individuals.
-We did not test correlation between $P_{self}$ and due to the small number of outcomes where elevated $P_{self}$ was observed.
+We did not test correlation between $P_{c}$ and due to the small number of outcomes where elevated $P_{c}$ was observed.
 
 With the viability of zero-, first-, and second-level individuality in the DISHTINY environment --- and the greater relative fitness of second-level individuality --- established, we were also interested in probing the strategies employed by zero-, first-, and second-level individuals beyond resource caching and reproductive deferment.
-To assess whether higher-level individuals employed apoptosis to mitigate somatic mutation, we examined the relationship between dominant genotype $P_0$ and $P_1$ and dominant genotype $M_{self}$ at update 19.5 million in the 33 replicate evolutionary trials performed.
-We observed a significant negative correlation between dominant genotype $P_0$ and $M_{self}$ ($p < 0.0001$; bootstrap test; Figure \ref{fig:champion_res_pool1_vs_champion_damage_suicide0}) and a significant positive correlation between dominant genotype $P_1$ and $M_{self}$ ($p < 0.0001$; bootstrap test; Figure \ref{fig:champion_res_pool2_vs_champion_damage_suicide0}).
-Notably, no genotype encoding second-level individuality was observed with $M_{self} < 0.5$.
+To assess whether higher-level individuals employed apoptosis to mitigate somatic mutation, we examined the relationship between dominant genotype $P_0$ and $P_1$ and dominant genotype $M_{c}$ at update 19.5 million in the 33 replicate evolutionary trials performed.
+We observed a significant negative correlation between dominant genotype $P_0$ and $M_{c}$ ($p < 0.0001$; bootstrap test; Figure \ref{fig:champion_res_pool1_vs_champion_damage_suicide0}) and a significant positive correlation between dominant genotype $P_1$ and $M_{c}$ ($p < 0.0001$; bootstrap test; Figure \ref{fig:champion_res_pool2_vs_champion_damage_suicide0}).
+Notably, no genotype encoding second-level individuality was observed with $M_{c} < 0.5$.
 This result suggests that second-level individuals, in particular, relied on apoptosis to mitigate somatic mutation, perhaps due to their much larger scale compared to first- and zeroth-level individuals.
 
 To assess whether higher-level individuals provided larger resource enowments to their propagules (offspring sharing neither the level zero nor the level one channel ID with the parent), we examined the relationship between dominant genotype $P_0$ and $P_1$ and dominant genotype $E_1$ at update 19.5 million in the 33 replicate evolutionary trials performed.
