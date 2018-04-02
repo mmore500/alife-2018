@@ -79,8 +79,8 @@ To recognize an evolutionary transition in individuality, we therefore evaluate
 \item Is there division of reproductive labor between members of the same channel %(i.e. between individuals enveloped in a same-channel signaling network and those on the periphery)?
 (e.g., do individuals at the periphery of a network behave differently from those in the interior?)
 \end{enumerate}
-If these conditions are met among organisms sharing the same zero-level channel, we can conclude that a first-level transition in individuality has occurred.
-Likewise, if these conditions are met among organisms sharing the same one-level channel, we can conclude that a second-level transition in individuality has occurred.
+If these conditions are met among organisms sharing the same level zero channel, we can conclude that a first-level transition in individuality has occurred.
+Likewise, if these conditions are met among organisms sharing the same level one channel, we can conclude that a second-level transition in individuality has occurred.
 
 \subsection{Organisms}
 
@@ -98,7 +98,7 @@ The altruism parameters ($A_0$ and $A_1$) control the probability that an organi
 Mutation is performed by a redraw from the uniform distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 Resource pool usage is controlled by the $P_{self}$, $P_0$, and $P_1$ parameters.
-The $P_{self}$ parameter controls the proportion of resource collected into and paid from an organism's individual resource stockpile, while the $P_0$ and $P_1$ parameters, respectively, control the proportion of resources going into and out of the resource resource pools shared by organisms with identical zero-level and one-level channel IDs.
+The $P_{self}$ parameter controls the proportion of resource collected into and paid from an organism's individual resource stockpile, while the $P_0$ and $P_1$ parameters, respectively, control the proportion of resources going into and out of the resource pools shared by organisms with identical level zero and level one channel IDs.
 These parameters are initialized by a draw from $U(0.0, 1.0)$ and mutated by addition of a normal value drawn from $N(0.0,0.2)$ with the result clamped to the range $[0,1]$.
 The set $P_{self}, P_0, P_1$ is always normalized to sum to 1.
 
@@ -113,7 +113,7 @@ As such, pool-funded reproduction fills in a channel-network from the inside out
 
 Channel caps $C_0$ and $C_1$ limit the size of same-channel signaling networks.
 %Intuitively, they are caps on how many cooperators each organism wants in its zero-level signaling network and one-level signaling network, respectively.
-When an organism reproduces, it checks the size of its zero-level signaling network against $C_0$ and the size of its one-level signaling group against $C_1$.
+When an organism reproduces, it checks the size of its level zero signaling network against $C_0$ and the size of its level one signaling group against $C_1$.
 If neither cap is met or exceeded, then the organism will produce an offspring sharing both of its channel IDs.
 If only the $C_0$ cap is exceeded, then the organism will produce an offspring with new level-zero ID, identical level-one channel ID.
 Finally, if the $C_1$ cap is exceeded, then the organism will produce an offspring with new IDs for both channels.
@@ -121,8 +121,8 @@ These parameters are initialized by a draw from $U(0.0, 48.0)$ and mutated by ad
 
 The endowment arameters $E_{self}$, $E_0$, and $E_1$ control the amount of resource provided to offspring.
 This endowment is paid as an additional cost by the cell stockpile (or same-channel resource pool) funding a reproduction.
-The full amount of the endowment is divided between the offspring's stockpile, zero-level same-channel resource pool, and one-level same-channel resource pool according to the offspring's parameters $P_{self}$, $P_0$, and $P_1$.
-Specifically, $E_{self}$ is the endowment amount paid to an offspring that shares the zero- and one-level channel ID of the parent;
+The full amount of the endowment is divided between the offspring's stockpile, level zero same-channel resource pool, and level one same-channel resource pool according to the offspring's parameters $P_{self}$, $P_0$, and $P_1$.
+Specifically, $E_{self}$ is the endowment amount paid to an offspring that shares the both channel ID of the parent;
 $E_1$ is the endowment paid to an offspring that shares just the level one channel ID of the parent;
 and $E_2$ is the endowment paid to an offspring that shares neither the level-zero nor level-one channel ID of the parent.
 Endowed resources help new-channel propagules to rapidly grow their signaling network in order to begin collecting resource at a competitive rate to other well-established signaling networks.
@@ -138,7 +138,7 @@ Initialization and mutation each of these parameters is performed by a redraw fr
 
 Finally, parameters $S_0$ and $S_1$ affect offspring placement.
 If an organism is placing an offspring with identical channel IDs, the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level zero signaling network.
-If an organism is placing an offspring with identical level one channel ID, but different level zero channel ID, the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's one-level same-channel signaling network.
+If an organism is placing an offspring with identical level one channel ID, but different level zero channel ID, the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level one same-channel signaling network.
 Otherwise, the four possible sites for offspring placement are considered in a random order.
 These parameters were included to enable more exacting control of
 Initialization and mutation is performed by a draw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
