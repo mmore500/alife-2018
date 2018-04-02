@@ -123,8 +123,8 @@ The endowment arameters $E_{self}$, $E_0$, and $E_1$ control the amount of resou
 This endowment is paid as an additional cost by the cell stockpile (or same-channel resource pool) funding a reproduction.
 The full amount of the endowment is divided between the offspring's stockpile, level zero same-channel resource pool, and level one same-channel resource pool according to the offspring's parameters $P_{self}$, $P_0$, and $P_1$.
 Specifically, $E_{self}$ is the endowment amount paid to an offspring that shares the both channel ID of the parent;
-$E_1$ is the endowment paid to an offspring that shares just the level one channel ID of the parent;
-and $E_2$ is the endowment paid to an offspring that shares neither the level-zero nor level-one channel ID of the parent.
+$E_0$ is the endowment paid to an offspring that shares just the level one channel ID of the parent;
+and $E_1$ is the endowment paid to an offspring that shares neither the level-zero nor level-one channel ID of the parent.
 Endowed resources help new-channel propagules to rapidly grow their signaling network in order to begin collecting resource at a competitive rate to other well-established signaling networks.
 These parameters are initialized by a draw from $U(0.0, 3.0)$ and are mutated by addition of a value drawn from $N(0.0,10.0)$ with the result clamped to be non-negative.
 
