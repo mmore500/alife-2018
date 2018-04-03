@@ -16,7 +16,7 @@ As shown at the top of Figure \ref{fig:explanatory}, resources appear in diamond
 With each simulation update, the resource wave advances one grid tile outward, disappearing when it reaches a predefined limit.
 In order to collect resource as it passes overhead, cell-level organisms must enter an activated state from their resting ready state.
 The cell-like organism at the starting position of a resource wave is automatically set to the activated state from the ready state.
-At the next update, this activated cell-like organism induces neighboring cell-like organisms registered to the same signaling channel to enter the activated state and itself transitions to a temporary quiescent state.
+At the next update, this activated cell-like organism automatically induces neighboring cell-like organisms registered to the same signaling channel to enter the activated state and itself transitions to a temporary quiescent state.
 Subsequently, the newly activated cell-like organisms activate ready neighbors registered to the same signaling channel and themselves enter a temporary quiescent state.
 In this manner, cells sharing the same signaling channel activate coincident with the expanding resource wave.
 As shown Figure \ref{fig:explanatory}$b$, the rate of resource collection for a cell-level organism is determined by the size and shape of of its same-channel signaling network;
