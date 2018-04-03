@@ -1,31 +1,37 @@
 \section{Conclusion}
 
-Using simple organisms that evolve parameters for a set of manually-designed strategies, we have demonstrated that DISHTINY environment selects for genotypes that exhibit high-level individuality.
+Using simple organisms that evolve parameters for a set of manually-designed strategies, we have demonstrated that DISHTINY the environment selects for genotypes that exhibit high-level individuality.
 We observed cell-, zeroth-, and first- level individuality among evolutionary outcomes.
 Specifically, we observed
 \begin{enumerate}
-  \item division of reproductive labor between members of the same channel (i.e. between individuals enveloped in a same-channel signaling network and those on the periphery), and
+  \item reproductive division of labor among members of the same channel (i.e. individuals enveloped in a same-channel signaling network behaved differently than those on the periphery), and
   \item cooperation between members of the same channel (i.e. pooling of resource on the same-channel signaling networks).
 \end{enumerate}
 
-Ecological trials revealed that first-level individuals outcompete zeroth- and cell-level individuals.
+Ecological trials revealed that first-level individuals usually outcompete zeroth- and cell-level individuals.
 Interestingly, employment of strategies to combat somatic mutation through apoptosis was correlated with first-level individuality.
 We observed that the magnitude of resource endowment for propagules was also correlated with first-level individuality.
 
-Although shifts in individuality coincident with the both the zero- and the one-level signaling network were both clearly observed, the question of whether these transitions were truly hierarchical in nature is debatable.
-That is, it is not clear whether zeroth-level individuality was to some extent preserved in or necessary for the emergence of first-level individuality.
-Given the nature of the manually-designed strategies for resource-pooling and reproductive division of labor, first-level resource pooling and division of labor could readily leapfrog over zeroth-level resource pooling and division of labor and, in many ways, seemed to completely supersede those zero-level efforts.
+Although shifts in individuality coincident with the level zero and level one signaling network were both clearly observed, the question of whether these transitions were truly hierarchical in nature is debatable.
+That is, it is not clear whether level-zero individuality was to some extent preserved in or necessary for the emergence of level-one individuality.
+Given the nature of the manually-designed strategies for resource-pooling and reproductive division of labor, level one resource pooling and division of labor could readily leapfrog over level zero resource pooling and division of labor and, in many ways, seemed to completely supersede those level zero efforts.
 
-We believe that this is a shortcoming of the design of organisms employed in these experiments, not the DISHTINY environment itself.
+We believe that this is a shortcoming of the design of the simple organism representation employed in these experiments, not the DISHTINY environment itself.
 We have nevertheless clearly demonstrated that the DISHTINY environment ultimately selects for high-level individuality.
 We are eager to work with more sophisticated cells capable of arbitrary computation via genetic programming in order to pursue more open-ended evolutionary experiments \cite{ofria2004avida}.
 Such work will provide valuable insight into scientific questions relating to major evolutionary transitions such as the role of pre-existing phenotypic plasticity \citep{clune2007investigating, lalejini2016evolutionary}, pre-existing environmental interactions, pre-existing reproductive division of labor, and how transitions relate to increases in organizational \citep{goldsby2012task}, structural, and functional \citep{goldsby2014evolutionary} complexity.
 
-We believe that such an approach also provides a unique opportunity to fundamentally further the ambition of the field of Artificial life with respect to open-ended evolution.
-Key to this ambition is scale.
-The DISHTINY environment near-trivially scales to select for an arbitrary number of hierarchical levels of individuality (not just the two hierarchical levels explored in these experiments).
-Importantly, the environment is implemented in a near-completely decentralized manner.
-This means that parallelization might be realized --- ultimately, perhaps on the level of the individual toroidal grid tile --- such that per-update run time can nearly remain constant whatever the area of the toroidal grid.
-Parallel computing is widely exploited in evolutionary computing, where subpopulations are farmed out to individual compute nodes for for periods of isolated evolution or single genotypes are farmed out to individual compute nodes for fitness evaluation \citep{lin1994coarse, real17a}.
+We believe that such an approach also provides a unique opportunity to fundamentally
+advance %further the ambition of the field of
+Artificial life with respect to open-ended evolution.
+One key to this goal is scale.
+The DISHTINY environment %near-
+trivially scales to select for an arbitrary number of hierarchical levels of individuality (not just the two hierarchical levels explored in these experiments).
+Importantly, the environment is implemented in a %near-completely
+decentralized manner
+%This means that parallelization might be realized --- ultimately, perhaps on the level of the individual toroidal grid tile --- such that per-update run time can nearly remain constant whatever the area of the toroidal grid.
+and can comfortably scale as additional computing resources are provided.
+Parallel computing is widely exploited in evolutionary computing, where subpopulations are farmed out to individual compute nodes for for periods of isolated evolution %or single genotypes are farmed out to individual compute nodes for fitness evaluation
+\citep{lin1994coarse, real17a}.
 The DISHTINY platform presents a more fundamental parallelization potential: principled parallelization of the evolving individual phenotype at arbitrary scale (i.e. a high-level individual as a large collection of individual cells on the toroidal grid).
 Such parallelization will be key to realizing evolving computational systems with scale --- and, perhaps, complexity --- approaching those of biological systems.
