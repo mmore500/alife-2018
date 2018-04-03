@@ -19,7 +19,7 @@ The cell-like organism at the starting position of a resource wave is automatica
 At the next update, this activated cell-like organism automatically induces neighboring cell-like organisms registered to the same signaling channel to enter the activated state and itself transitions to a temporary quiescent state.
 Subsequently, the newly activated cell-like organisms activate ready neighbors registered to the same signaling channel and themselves enter a temporary quiescent state.
 In this manner, cells sharing the same signaling channel activate coincident with the expanding resource wave.
-As shown Figure \ref{fig:explanatory}$b$, the rate of resource collection for a cell-level organism is determined by the size and shape of of its same-channel signaling network;
+As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell-level organism is determined by the size and shape of of its same-channel signaling network;
 small or fragmented same-channel signaling networks will frequently miss out on resource as it passes overhead.
 
 Each cell-like organism pays a resource cost when it enters the activated state.
@@ -45,7 +45,7 @@ Hierarchical levels are introduced into the system through multiple instantiatio
 In our experiments, we worked with two resource wave/channel-signaling levels, identified here as level zero and level one.
 On level zero, resource waves extended a radius of four toroidal tiles.
 On level one they extended a radius of twelve toroidal tiles.
-On both levels, activated organisms netted $+1$ resource from a resource wave, but suffered an activation penalty of $-5$ if no resource was available.
+On both levels, activated organisms netted $+1.0$ resource from a resource wave, but suffered an activation penalty of $-5.0$ if no resource was available.
 Due to the different radii of resource waves on different levels, level zero selects for smaller same-channel signaling networks and level one selects for larger same-channel signaling networks.
 
 We enforced hierarchical nesting of these same-channel signaling networks during reproduction:
