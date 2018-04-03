@@ -49,9 +49,9 @@ On both levels, activated organisms netted $+1.0$ resource from a resource wave,
 Due to the different radii of resource waves on different levels, level zero selects for smaller same-channel signaling networks and level one selects for larger same-channel signaling networks.
 
 We enforced hierarchical nesting of these same-channel signaling networks during reproduction:
-daughter cells may inherit neither channel ID, just the level one channel ID, or both channel IDs.
-Daughter cells may not inherit only the level zero channel while having a different level one channel.
-The distribution of IDs across the level one and level zero channels can be envisioned by analogy to political countries and territories.
+daughter cells may inherit neither channel ID, just the level-one channel ID, or both channel IDs.
+Daughter cells may not inherit only the level-zero channel ID while having a different level-one channel ID.
+The distribution of IDs across the level-one and level-zero channels can be envisioned by analogy to political countries and territories.
 Each country (i.e. level-one channel network) may have one or many territories (i.e. level-zero channel network).
 However, no territory spans more than one country.
 Figure \ref{fig:outcome_grids} depicts hierarchically nested channel states at the end of three evolutionary runs.
@@ -64,8 +64,8 @@ To recognize an evolutionary transition in individuality, we therefore evaluate
 \item Do cell-level organisms with the same channel ID choose to share resources (e.g. cooperate)?
 \item Is there division of reproductive labor between members of the same channel (e.g., do cell-level organisms at the interior of a network cede reproduction to those at the periphery?)
 \end{enumerate}
-If these conditions are met among cell-level organisms sharing the same level zero channel, we can conclude that a zeroth-level transition in individuality has occurred.
-Likewise, if these conditions are met among cell-level organisms sharing the same level one channel, we can conclude that a first-level transition in individuality has occurred.
+If these conditions are met among cell-level organisms sharing the same level-zero channel, we can conclude that a zeroth-level transition in individuality has occurred.
+Likewise, if these conditions are met among cell-level organisms sharing the same level-one channel, we can conclude that a first-level transition in individuality has occurred.
 
 \subsection{Organisms}
 
@@ -77,7 +77,7 @@ The altruism parameters ($A_0$ and $A_1$) control the probability that an organi
 Mutation is performed by a redraw from the uniform distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 Resource allocation is controlled by the $P_{c}$, $P_0$, and $P_1$ parameters.
-The $P_{c}$ parameter controls the proportion of resource collected into and paid from a cell's individual resource stockpile, while the $P_0$ and $P_1$ parameters, respectively, control the proportion of resources going into and out of resource pools shared by organisms with identical level zero and level one channel IDs.
+The $P_{c}$ parameter controls the proportion of resource collected into and paid from a cell's individual resource stockpile, while the $P_0$ and $P_1$ parameters, respectively, control the proportion of resources going into and out of resource pools shared by organisms with identical level-zero and level-one channel IDs.
 These parameters are initialized by a draw from $U(0.0, 1.0)$ and mutated by addition of a normal value drawn from $N(0.0,0.2)$ with the result clamped to the range $[0,1]$.
 The set $P_{c}, P_0, P_1$ is always normalized to sum to 1.
 
@@ -87,7 +87,7 @@ As such, pool-funded reproduction fills in a same-channel signaling network from
 (Distance is measured using the taxicab metric.)
 
 Channel caps $C_0$ and $C_1$ limit the size of same-channel signaling networks.
-When an organism reproduces, it checks the size of its level zero signaling network against $C_0$ and the size of its level one signaling group against $C_1$.
+When an organism reproduces, it checks the size of its level-zero signaling network against $C_0$ and the size of its level-one signaling group against $C_1$.
 If neither cap is met or exceeded, then the organism will produce an offspring sharing both of its channel IDs.
 If only the $C_0$ cap is exceeded, then the organism will produce an offspring with new level-zero channel ID but identical level-one channel ID.
 Finally, if the $C_1$ cap is exceeded, then the organism will produce an offspring with new IDs for both channels.
@@ -95,30 +95,30 @@ These parameters are initialized by a draw from $U(0.0, 48.0)$ and mutated by ad
 
 The endowment parameters $E_{c}$, $E_0$, and $E_1$ control the amount of resource provided to offspring.
 This endowment is paid as an additional cost by the cell stockpile (or same-channel resource pool) funding a reproduction.
-The full amount of the received endowment is divided between the daughter cell's stockpile, level zero same-channel resource pool, and level one same-channel resource pool according to the offspring's parameters $P_{c}$, $P_0$, and $P_1$.
+The full amount of the received endowment is divided between the daughter cell's stockpile, level-zero same-channel resource pool, and level-one same-channel resource pool according to the offspring's parameters $P_{c}$, $P_0$, and $P_1$.
 Specifically, $E_{c}$ is the endowment amount paid to an offspring that shares both channel IDs of the parent;
-$E_0$ is the endowment paid to an offspring that shares just the level one channel ID of the parent;
+$E_0$ is the endowment paid to an offspring that shares just the level-one channel ID of the parent;
 and $E_1$ is the endowment paid to an offspring that shares neither the level-zero nor level-one channel ID of the parent.
 Endowed resources help new-channel propagules to rapidly grow their signaling network in order to begin collecting resource at a rate competitive to other well-established same-channel signaling networks.
 These parameters are initialized by a draw from $U(0.0, 3.0)$ and are mutated by addition of a value drawn from $N(0.0,10.0)$ with the result clamped to be non-negative.
 
 Parameters $M_{c}$, $M_0$, and $M_1$ control the attempt of suicide on genetic damage.
-Each time that a mutation occurs during reproduction, the mutated offspring attempts suicide with probability $M_{c}$ if it shares both channel IDs of its parent, probability $M_0$ if it shares just the level one channel ID of its parent, and probability $M_1$ if it shares neither channel ID of the parent.
+Each time that a mutation occurs during reproduction, the mutated offspring attempts suicide with probability $M_{c}$ if it shares both channel IDs of its parent, probability $M_0$ if it shares just the level-one channel ID of its parent, and probability $M_1$ if it shares neither channel ID of the parent.
 The $M_x$ value applied is from the offspring's genotype after mutation.
 Attempted suicide succeeds 80\% of the time.
 This capacity enables zeroth- or first-level individuals to combat somatic mutation.
 Initialization and mutation each of these parameters is performed by a redraw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 Finally, parameters $S_0$ and $S_1$ affect offspring placement.
-If an organism is placing an offspring with identical channel IDs, with probability $S_0$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level zero signaling network.
-If an organism is placing an offspring with identical level one channel ID but different level zero channel ID, with probability $S_1$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level one same-channel signaling network.
+If an organism is placing an offspring with identical channel IDs, with probability $S_0$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-zero signaling network.
+If an organism is placing an offspring with identical level-one channel ID but different level-zero channel ID, with probability $S_1$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-one same-channel signaling network.
 Otherwise, the four possible sites for offspring placement are considered in a random order.
 These parameters were included to enable more precise control of reproductive behavior.
 Initialization and mutation are performed by a draw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 \subsection{Experiments}
 
-We performed experiments to assess the evolutionary trajectories of populations in the DISHTINY environment.
+We performed experiments to assess the evolutionary trajectories of populations in the DISHTINY platform environment.
 We seeded each tile on the $120 \times 120$ toroidal grid with a randomized organism and ran the simulation for 20 million updates.
 We performed 33 replications of this experiment, each taking approximately 60 hours.
 Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 11.3 with a standard deviation of 1.9 cellular generations per 10,000 updates.

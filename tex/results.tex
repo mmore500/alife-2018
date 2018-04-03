@@ -17,24 +17,24 @@ The criteria used to discern these outcomes are described below.
 Figure \ref{fig:outcome_grids} shows the level-zero and level-one signaling networks at the end of runs where cell-, zeroth-, and first-level individuality evolved, respectively.
 Figure \ref{fig:grid_progression} shows a time series of signaling network snapshots in an evolutionary run where first-level individuality evolved.
 Cell-level individuals appear to form with comparatively large level-zero signaling networks that are arranged into amorphous level-one signaling networks.
-Zeroth-level individuals appear to form elongated cigar-shaped level one amalgamations of diverse level-zero networks.
-First-level individuals appear to form highly regular diamond-shaped level one amalgamations of diverse level zero networks.
+Zeroth-level individuals appear to form elongated cigar-shaped level-one amalgamations of diverse level-zero networks.
+First-level individuals appear to form highly regular diamond-shaped level-one amalgamations of diverse level-zero networks.
 
 Figure \ref{fig:genotypes} describes predominant genotypes observed at the end of our evolutionary simulations.
 With a single exception, nearly all evolved genotypes had $A_1$ fixed at or very near $1.0$ (i.e. population mean $A_1 \geq 0.993$).
 So, reproduction over cells sharing the same level-one channel was near-universally avoided;
-genotypes evolved so that cell-level organisms declined to reproduce when they were located at the interior of level one same-channel signaling networks.
+genotypes evolved so that cell-level organisms declined to reproduce when they were located at the interior of level-one same-channel signaling networks.
 
 However, a variety of resource-caching strategies evolved.
 Most-abundant genotypes at the end of evolutionary runs included strategies where resource was primarily cached in an organism's individual stockpile (i.e. $P_{c} > P_0, P_1$), strategies where resource was primarily cached in an organism's level-zero signaling network's pool (i.e. $P_0 > P_{c}, P_1$), and strategies where resource was primarily cached in an organism's level-one signaling network's pool (i.e. $P_1 > P_{c}, P_0$).
 Among 33 trials, selfish cell-level hoarders dominated at the end of two replicates, level-zero resource-sharing dominated in 16 replicates, and level-one resource sharing dominated in 15 replicates.
 
-Given the near-ubiquitous nature of cooperation with regard to reproductive division of labor at the level one same-channel signaling network, it was on this basis of resource caching strategy that we drew distinctions between cell-, zeroth-, and first-level individuality.
-(The single predominant genotype with $A_1 = 0.91$ had $P_0 = 1.0$, so was not sharing resource on the level one same-channel resource pool).
+Given the near-ubiquitous nature of cooperation with regard to reproductive division of labor at the level-one same-channel signaling network, it was on this basis of resource caching strategy that we drew distinctions between cell-, zeroth-, and first-level individuality.
+(The single predominant genotype with $A_1 = 0.91$ had $P_0 = 1.0$, so was not sharing resource on the level-one same-channel resource pool).
 % @CAO: I'm not sure where this final parenthetical came from.  I take it this is the single "selfish" individual in the second example above?
 % @MAM: Exactly.
 
-Next, we wanted to compare cell-, zeroth-, and first-level individuals to determine which genotype was the most fit in the DISHTINY environment.
+Next, we wanted to compare cell-, zeroth-, and first-level individuals to determine which genotype was the most fit in the DISHTINY platform environment.
 We ran ecological competitions between the the dominant genotypes from the run with greatest mean $P_{c}$, the run with greatest mean $P_0$, and the run with greatest mean $P_1$.
 In 22 out of 191 trials performed fixation was reached by update 1.5 million.  The cell-level individuality genotype dominated in one trial, the zeroth-level individuality genotype dominated in 12 trials, and the first-level individuality genotype dominated in 178 trials.
 These results show that in the absence of mutation, first-level individuals tend to exhibit greater fitness than zeroth- and cell-th level individuals ($p < 0.0001$; RR 2.8; two-tailed exact test).
@@ -45,12 +45,12 @@ We observed a significant negative correlation between mean $P_0$ and cellular r
 This result suggests that first-level individuals tend to collect resource more effectively than zeroth-level individuals.
 We did not test correlation between $P_{c}$ and reproduction rate due to the small number of outcomes where cell-level individuality.
 
-With the viability of cell-, zeroth-, and first-level individuality in the DISHTINY environment --- and the greater relative fitness of first-level individuality --- established, we were also interested in probing the strategies employed by cell-, zeroth-, and first-level individuals beyond resource caching and reproductive deferment.
+With the viability of cell-, zeroth-, and first-level individuality in the DISHTINY platform environment --- and the greater relative fitness of first-level individuality --- established, we were also interested in probing the strategies employed by cell-, zeroth-, and first-level individuals beyond resource caching and reproductive deferment.
 To assess whether higher-level individuals employed apoptosis to mitigate somatic mutation, we examined the relationship between zeroth/first-level resource pooling and cell-level apoptosis at the conclusion of our 33 replicate evolutionary trials.
 We observed a significant negative correlation between dominant genotype $P_0$ and $M_{c}$ ($p < 0.0001$; bootstrap test; Figure \ref{fig:champion_res_pool1_vs_champion_damage_suicide0}) and a significant positive correlation between dominant genotype $P_1$ and $M_{c}$ ($p < 0.0001$; bootstrap test; Figure \ref{fig:champion_res_pool2_vs_champion_damage_suicide0}).
 Notably, no genotype encoding first-level individuality was observed with $M_{c} < 0.5$.
 This result suggests that first-level individuals, in particular, relied on apoptosis to mitigate somatic mutation, perhaps due to their much larger scale compared to cell- and zeroth-level individuals.
 
-To assess whether higher-level individuals provided larger resource endowments to their propagules (offspring sharing neither the level zero nor the level one channel ID with the parent), we examined the relationship between zeroth/first-level resource pooling and dominant genotype first-level propagule endowment at the conclusion of our 33 replicate evolutionary trials.
+To assess whether higher-level individuals provided larger resource endowments to their propagules (offspring sharing neither the level-zero nor the level-one channel ID with the parent), we examined the relationship between zeroth/first-level resource pooling and dominant genotype first-level propagule endowment at the conclusion of our 33 replicate evolutionary trials.
 We observed a significant negative correlation between dominant genotype $P_0$ and $E_1$ ($p < 0.001$; bootstrap test; Figure \ref{fig:champion_res_pool1_vs_champion_endowment2}) and a significant positive correlation between dominant genotype $P_1$ and $E_1$ ($p <  0.0001$; bootstrap test; Figure \ref{fig:champion_res_pool2_vs_champion_endowment2}).
 First-level individuals might provide larger endowments to propagules simply due to a greater capacity to collect resource or perhaps because of stronger selection for well-endowed offspring when competing against other first-level individuals.
