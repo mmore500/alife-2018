@@ -74,8 +74,10 @@ These cell-level organisms are in no way inherent to the DISHTINY platform, but 
 On reproduction, mutation was applied to each parameter independently with probability $0.00005$.
 
 \textbf{
-The altruism parameters ($A_1$ and $A_2$) control the probability that an organism declines to replace an adjoining organism that shares the same level-one ($A_1$) or level-two ($A_2$) channel ID with their offspring.
+The aversion parameters ($A_1$ and $A_2$) allow cell-like organisms to avoid reproducing over neighbors sharing the same signaling channel.
 }
+Specifically, they control the probability that a cell-like organism declines to supplant a neighbor sharing the same level-one ($A_1$) or level-two ($A_2$) channel ID with.
+If a cell-like organism declines to place its offspring in all four adjoining tiles, it does not pay the resource cost to reproduce and does not reproduce.
 Mutation is performed by a redraw from the uniform distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 \textbf{
@@ -100,7 +102,7 @@ Finally, if the $C_2$ cap is exceeded, then the organism will produce an offspri
 These parameters are initialized by a draw from $U(0.0, 48.0)$ and mutated by addition of a value drawn from $N(0.0,24.0)$ with the result clamped to be non-negative.
 
 \textbf{
-The endowment parameters $E_{c}$, $E_1$, and $E_2$ control the amount of resource provided to offspring.
+The endowment parameters $E_{c}$, $E_1$, and $E_2$ determine the amount of resource provided to offspring.
 }
 This endowment is paid as an additional cost by the cell stockpile (or same-channel resource pool) funding a reproduction.
 The full amount of the received endowment is divided between the daughter cell's stockpile, level-one same-channel resource pool, and level-two same-channel resource pool according to the offspring's parameters $P_{c}$, $P_1$, and $P_2$.
@@ -111,7 +113,7 @@ Endowed resources help new-channel propagules to rapidly grow their signaling ne
 These parameters are initialized by a draw from $U(0.0, 3.0)$ and are mutated by addition of a value drawn from $N(0.0,10.0)$ with the result clamped to be non-negative.
 
 \textbf{
-Parameters $M_{c}$, $M_1$, and $M_2$ control the attempt of suicide on genetic damage.
+Parameters $M_{c}$, $M_1$, and $M_2$ control the apoptosis response to mutation.
 }
 Each time that a mutation occurs during reproduction, the mutated offspring attempts suicide with probability $M_{c}$ if it shares both channel IDs of its parent, probability $M_1$ if it shares just the level-two channel ID of its parent, and probability $M_2$ if it shares neither channel ID of the parent.
 The $M_x$ value applied is from the offspring's genotype after mutation.
@@ -120,7 +122,7 @@ This capacity enables first- or second-level individuals to combat somatic mutat
 Initialization and mutation each of these parameters is performed by a redraw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 \textbf{
-Finally, parameters $S_1$ and $S_2$ affect offspring placement.
+Finally, parameters $S_1$ and $S_2$ fine-tune offspring placement.
 }
 If an organism is placing an offspring with identical channel IDs, with probability $S_1$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-one signaling network.
 If an organism is placing an offspring with identical level-two channel ID but different level-one channel ID, with probability $S_2$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-two same-channel signaling network.
