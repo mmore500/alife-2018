@@ -73,10 +73,14 @@ We performed our experiments using cell-level organisms comprised of a set of 15
 These cell-level organisms are in no way inherent to the DISHTINY platform, but were merely developed to study the platform.
 On reproduction, mutation was applied to each parameter independently with probability $0.00005$.
 
+\textbf{
 The altruism parameters ($A_1$ and $A_2$) control the probability that an organism declines to replace an adjoining organism that shares the same level-one ($A_1$) or level-two ($A_2$) channel ID with their offspring.
+}
 Mutation is performed by a redraw from the uniform distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
+\textbf{
 Resource allocation is controlled by the $P_{c}$, $P_1$, and $P_2$ parameters.
+}
 The $P_{c}$ parameter controls the proportion of resource collected into and paid from a cell's individual resource stockpile, while the $P_1$ and $P_2$ parameters, respectively, control the proportion of resources going into and out of resource pools shared by organisms with identical level-one and level-two channel IDs.
 These parameters are initialized by a draw from $U(0.0, 1.0)$ and mutated by addition of a normal value drawn from $N(0.0,0.2)$ with the result clamped to the range $[0,1]$.
 The set $P_{c}, P_1, P_2$ is always normalized to sum to 1.
@@ -86,14 +90,18 @@ On every update, cell-level organisms can spend from their individual stockpile 
 As such, pool-funded reproduction fills in a same-channel signaling network from the inside out and can result in diamond-shaped same-channel signaling networks.
 (Distance is measured using the taxicab metric.)
 
+\textbf{
 Channel caps $C_1$ and $C_2$ limit the size of same-channel signaling networks.
+}
 When an organism reproduces, it checks the size of its level-one signaling network against $C_1$ and the size of its level-two signaling group against $C_2$.
 If neither cap is met or exceeded, then the organism will produce an offspring sharing both of its channel IDs.
 If only the $C_1$ cap is exceeded, then the organism will produce an offspring with new level-one channel ID but identical level-two channel ID.
 Finally, if the $C_2$ cap is exceeded, then the organism will produce an offspring with new IDs for both channels.
 These parameters are initialized by a draw from $U(0.0, 48.0)$ and mutated by addition of a value drawn from $N(0.0,24.0)$ with the result clamped to be non-negative.
 
+\textbf{
 The endowment parameters $E_{c}$, $E_1$, and $E_2$ control the amount of resource provided to offspring.
+}
 This endowment is paid as an additional cost by the cell stockpile (or same-channel resource pool) funding a reproduction.
 The full amount of the received endowment is divided between the daughter cell's stockpile, level-one same-channel resource pool, and level-two same-channel resource pool according to the offspring's parameters $P_{c}$, $P_1$, and $P_2$.
 Specifically, $E_{c}$ is the endowment amount paid to an offspring that shares both channel IDs of the parent;
@@ -102,14 +110,18 @@ and $E_2$ is the endowment paid to an offspring that shares neither the level-on
 Endowed resources help new-channel propagules to rapidly grow their signaling network in order to begin collecting resource at a rate competitive to other well-established same-channel signaling networks.
 These parameters are initialized by a draw from $U(0.0, 3.0)$ and are mutated by addition of a value drawn from $N(0.0,10.0)$ with the result clamped to be non-negative.
 
+\textbf{
 Parameters $M_{c}$, $M_1$, and $M_2$ control the attempt of suicide on genetic damage.
+}
 Each time that a mutation occurs during reproduction, the mutated offspring attempts suicide with probability $M_{c}$ if it shares both channel IDs of its parent, probability $M_1$ if it shares just the level-two channel ID of its parent, and probability $M_2$ if it shares neither channel ID of the parent.
 The $M_x$ value applied is from the offspring's genotype after mutation.
 Attempted suicide succeeds 80\% of the time.
 This capacity enables first- or second-level individuals to combat somatic mutation.
 Initialization and mutation each of these parameters is performed by a redraw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
+\textbf{
 Finally, parameters $S_1$ and $S_2$ affect offspring placement.
+}
 If an organism is placing an offspring with identical channel IDs, with probability $S_1$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-one signaling network.
 If an organism is placing an offspring with identical level-two channel ID but different level-one channel ID, with probability $S_2$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-two same-channel signaling network.
 Otherwise, the four possible sites for offspring placement are considered in a random order.
