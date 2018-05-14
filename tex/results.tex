@@ -6,12 +6,6 @@
 
 \input{fig/grid_progression.tex}
 
-\input{fig/damage_suicide.tex}
-
-\input{fig/net_reproduction.tex}
-
-\input{fig/endowment.tex}
-
 Cell-, first-, and second-level individuals were all observed at the conclusion of different runs of our evolutionary simulation (mean generation 22,016; $s=3,119$).
 The criteria used to discern these outcomes are described below.
 Figure \ref{fig:outcome_grids} shows the level-one and level-two signaling networks at the end of runs where cell-, first-, and second-level individuality evolved, respectively.
@@ -39,11 +33,15 @@ We ran ecological competitions between the the dominant genotypes from the run w
 In 22 out of 191 trials performed fixation was reached by update 1.5 million.  The cell-level individuality genotype dominated in one trial, the first-level individuality genotype dominated in 12 trials, and the first-level individuality genotype dominated in 178 trials.
 These results show that in the absence of mutation, first-level individuals tend to exhibit greater fitness than first- and cell-level individuals ($p < 0.0001$; RR 2.8; two-tailed exact test).
 
+\input{fig/net_reproduction.tex}
+
 In ecological competition, however, higher-level individuals likely benefited from elimination of somatic mutation.
 To assess the relative fitness of first- and second-level individuals without mutation disabled, we examined the relationship between first- and second-level resource pooling and the rate of cellular reproduction at the end of each of the 33 replicate evolutionary trials performed.
 We observed a significant negative correlation between mean $P_1$ and cellular reproduction rate ($p < 0.0001$; bootstrap test; Figure \ref{fig:mean_res_pool1_vs_net_reproduction}) and a significant positive correlation between mean $P_2$ and cellular reproduction rate ($p < 0.0001$; bootstrap test; Figure \ref{fig:mean_res_pool2_vs_net_reproduction}).
 This result suggests that second-level individuals tend to collect resource more effectively than first-level individuals.
 We did not test correlation between $P_{c}$ and reproduction rate due to the small number of trials where cell-level individuality dominated.
+
+\input{fig/damage_suicide.tex}
 
 With the viability of cell-, first-, and second-level individuality in the DISHTINY platform environment --- and the greater relative fitness of second-level individuality --- established, we were also interested in probing the strategies employed by cell-, first-, and second-level individuals beyond resource caching and reproductive deferment.
 To assess whether higher-level individuals employed apoptosis to mitigate somatic mutation, we examined the relationship between first- and second-level resource pooling and cellular apoptosis at the conclusion of our 33 replicate evolutionary trials.
@@ -52,5 +50,5 @@ Notably, no genotype encoding second-level individuality was observed with $M_{c
 This result suggests that second-level individuals, in particular, relied on apoptosis to mitigate somatic mutation, perhaps due to their much larger scale compared to cell- and first-level individuals.
 
 To assess whether higher-level individuals provided larger resource endowments to their propagules (offspring sharing neither the level-one nor the level-two channel ID with the parent), we examined the relationship between first and second-level resource pooling and dominant genotype second-level propagule endowment at the conclusion of our 33 replicate evolutionary trials.
-We observed a significant negative correlation between dominant genotype $P_1$ and $E_2$ ($p < 0.001$; bootstrap test; Figure \ref{fig:champion_res_pool1_vs_champion_endowment2}) and a significant positive correlation between dominant genotype $P_2$ and $E_2$ ($p <  0.0001$; bootstrap test; Figure \ref{fig:champion_res_pool2_vs_champion_endowment2}).
+We observed a significant negative correlation between dominant genotype $P_1$ and $E_2$ ($p < 0.001$; bootstrap test) and a significant positive correlation between dominant genotype $P_2$ and $E_2$ ($p <  0.0001$; bootstrap test).
 Second-level individuals might provide larger endowments to propagules simply due to a greater capacity to collect resource or perhaps because of stronger selection for well-endowed offspring when competing against other second-level individuals.
