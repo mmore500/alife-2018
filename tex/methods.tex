@@ -8,22 +8,22 @@ We will first cover the design of the DISHTINY platform then move on to describe
 \input{fig/explanatory.tex}
 
 DISHTINY centers around cell-like organisms distributed over a toroidal grid.
-Over discrete timesteps called ``updates,'' the cell-like organisms collect a single continuous-valued resource.
-Once sufficient resource has been accrued, cell-level organisms may pay a cost of $-8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e. reproduce).
-Any cell-level organism existing on that adjoining tile is destroyed and replaced with the daughter cell.
+Over discrete timesteps called ``updates,'' the cells collect a single continuous-valued resource.
+Once sufficient resource has been accrued, cells may pay a cost of $-8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce).
+Any cell existing on that adjoining tile is destroyed and replaced with the daughter cell.
 
 As shown at the top of Figure \ref{fig:explanatory}, resources appear in diamond-shaped waves that emanate from a single point.
 With each simulation update, the resource wave advances one grid tile outward, disappearing when it reaches a predefined limit.
-In order to collect resource as it passes overhead, cell-level organisms must enter an activated state from their resting ready state.
-The cell-like organism at the starting position of a resource wave is automatically set to the activated state from the ready state.
-At the next update, this activated cell-like organism automatically induces neighboring cell-like organisms registered to the same signaling channel to enter the activated state and itself transitions to a temporary quiescent state.
-Subsequently, the newly activated cell-like organisms activate ready neighbors registered to the same signaling channel and themselves enter a temporary quiescent state.
+In order to collect resource as it passes overhead, cells must enter an activated state from their resting ready state.
+The cell at the starting position of a resource wave is automatically set to the activated state from the ready state.
+At the next update, this activated cell automatically induces neighboring cells registered to the same signaling channel to enter the activated state and itself transitions to a temporary quiescent state.
+Subsequently, the newly activated cell activate ready neighbors registered to the same signaling channel and themselves enter a temporary quiescent state.
 In this manner, cells sharing the same signaling channel activate coincident with the expanding resource wave.
-As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell-level organism is determined by the size and shape of of its same-channel signaling network;
+As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell is determined by the size and shape of of its same-channel signaling network;
 small or fragmented same-channel signaling networks will frequently miss out on resource as it passes overhead.
 
-Each cell-like organism pays a resource cost when it enters the activated state.
-This cost is outweighed by the resource collected such that cell-like organisms which activate in concert with a resource wave derive a net benefit.
+Each cell pays a resource cost when it enters the activated state.
+This cost is outweighed by the resource collected such that cells which activate in concert with a resource wave derive a net benefit.
 Recall, though, that resource waves have a limited extent.
 Cells that activate outside the extent of a resource wave or activate out of sync with the resource wave (due to an indirect path from the cell that originated the signal) pay the activation cost but collect no resource.
 Cells that frequently activate erroneously use up their resource and die.
@@ -37,11 +37,12 @@ All waves start and are updated synchronously;
 when they complete, the next batch of resource waves is seeded.
 This process ensures that selection for ``Goldilocks'' same-channel signaling networks is uniformly distributed over the toroidal grid.
 
-Cell-level organisms may control the size and shape of their same-channel signaling group by strategic control of reproduction.
+Cells may control the size and shape of their same-channel signaling group by strategic control of reproduction.
 Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or should instead be registered to a random channel ID (in the range 1 to $2^{22}$).
 No guarantees are made about the uniqueness of a newly-generated channel ID, but chance collisions are rare.
 
-Hierarchical levels are introduced into the system through multiple instantiations of this resource wave/channel-signaling scheme.
+Hierarchical levels are introduced into the system through multiple completely independent, but overlaid, instantiations of this resource wave/channel-signaling scheme.
+We refer to each independent resource wave/channel-signaling system as a ``level.''
 In our experiments, we worked with two resource wave/channel-signaling levels, identified here as level one and level two.
 On level one, resource waves extended a radius of four toroidal tiles.
 On level two they extended a radius of twelve toroidal tiles.
@@ -52,7 +53,7 @@ We enforced hierarchical nesting of these same-channel signaling networks during
 daughter cells may inherit neither channel ID, just the level-two channel ID, or both channel IDs.
 Daughter cells may not inherit only the level-one channel ID while having a different level-two channel ID.
 The distribution of IDs across the level-two and level-one channels can be envisioned by analogy to political countries and territories.
-Each country (i.e. level-two channel network) may have one or many territories (i.e. level-one channel network).
+Each country (i.e., level-two channel network) may have one or many territories (i.e., level-one channel network).
 However, no territory spans more than one country.
 Figure \ref{fig:outcome_grids} depicts hierarchically nested channel states at the end of three evolutionary runs.
 
@@ -61,23 +62,23 @@ Because common channel IDs may only arise systematically through inheritance, co
 Because new channel IDs arise first in a single cell, same-channel signaling networks are reproductively bottlenecked, ensuring meaningful reproductive lineages at the level of the same-channel signaling network.
 To recognize an evolutionary transition in individuality, we therefore evaluate
 \begin{enumerate}
-\item Do cell-level organisms with the same channel ID choose to share resources (e.g. cooperate)?
-\item Is there division of reproductive labor between members of the same channel (e.g., do cell-level organisms at the interior of a network cede reproduction to those at the periphery?)
+\item Do cells with the same channel ID choose to share resources (e.g., cooperate)?
+\item Is there division of reproductive labor between members of the same channel (e.g., do cells at the interior of a network cede reproduction to those at the periphery?)
 \end{enumerate}
-If these conditions are met among cell-level organisms sharing the same level-one channel, we can conclude that a first-level transition in individuality has occurred.
-Likewise, if these conditions are met among cell-level organisms sharing the same level-two channel, we can conclude that a second-level transition in individuality has occurred.
+If these conditions are met among cells sharing the same level-one channel, we can conclude that a first-level transition in individuality has occurred.
+Likewise, if these conditions are met among cells sharing the same level-two channel, we can conclude that a second-level transition in individuality has occurred.
 
 \subsection{Organisms}
 
-We performed our experiments using cell-level organisms comprised of a set of 15 floating-point parameters, each controlling a specific lifestyle strategy component.
-These cell-level organisms are in no way inherent to the DISHTINY platform, but were merely developed to study the platform.
+We performed our experiments using cell-like organisms comprised of a set of 15 floating-point parameters, each controlling a specific lifestyle strategy component pertinent to transitions of individuality (i.e., reproductive division of labor, resource pooling, apoptosis, propagule generation, and propagule endowment).
+These particular cell-like organisms are in no way inherent to the DISHTINY platform, but were merely developed to study the platform.
 On reproduction, mutation was applied to each parameter independently with probability $0.00005$.
 
 \textbf{
-The aversion parameters ($A_1$ and $A_2$) allow cell-like organisms to avoid reproducing over neighbors sharing the same signaling channel.
+The aversion parameters ($A_1$ and $A_2$) allow cells to avoid reproducing over neighbors sharing the same signaling channel.
 }
-Specifically, they control the probability that a cell-like organism declines to supplant a neighbor sharing the same level-one ($A_1$) or level-two ($A_2$) channel ID.
-If a cell-like organism declines to place its offspring in all four adjoining tiles, it does not pay the resource cost to reproduce and does not reproduce.
+Specifically, they control the probability that a cell declines to supplant a neighbor sharing the same level-one ($A_1$) or level-two ($A_2$) channel ID.
+If a cell declines to place its offspring in all four adjoining tiles, it does not pay the resource cost to reproduce and does not reproduce.
 Mutation is performed by a redraw from the uniform distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 \textbf{
@@ -88,7 +89,7 @@ These parameters are initialized by a draw from $U(0.0, 1.0)$ and mutated by add
 The set $P_{c}, P_1, P_2$ is always normalized to sum to 1.
 
 Channel resource pools are identical to an organism's individual stockpile, except that any deficit is distributed evenly among the individual organism's stockpile.
-On every update, cell-level organisms can spend from their individual stockpile to reproduce or from a channel pool, with priority given to cell-level organisms nearest to the centroid of that pool's members.
+On every update, cells can spend from their individual stockpile to reproduce or from a channel pool, with priority given to cells nearest to the centroid of that pool's members.
 As such, pool-funded reproduction fills in a same-channel signaling network from the inside out and can result in diamond-shaped same-channel signaling networks.
 (Distance is measured using the taxicab metric.)
 
@@ -138,7 +139,7 @@ We performed 33 replications of this experiment, each taking approximately 60 ho
 Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 11.3 with a standard deviation of 1.9 cellular generations per 10,000 updates.
 
 We observed evolutionary outcomes that resembled cell-, first-, and second-level individuality.
-To assess the relative fitness of these evolved organisms, we ran ecological competitions between three genotypes --- one selected as the most common genotype from the evolutionary run where the greatest mean $P_{c}$ was observed, one selected as the most common genotype from the evolutionary run where the greatest mean $P_1$ was observed, and the other selected as the most common genotype from the evolutionary run where the greatest mean $P_2$ was observed.
+To assess the relative fitness of these evolved organisms, we ran ecological competitions between three genotypes --- one selected as the most common genotype from the evolutionary run where the greatest mean $P_{c}$ was observed (i.e., cell-level individuality was observed), one selected as the most common genotype from the evolutionary run where the greatest mean $P_1$ was observed (i.e., first-level individuality was observed), and the other selected as the most common genotype from the evolutionary run where the greatest mean $P_2$ was observed (i.e., second-level individuality observed).
 We seeded each ecological run with three copies of each genotype, uniformly spaced over the $120 \times 120$ toroidal grid with random arrangement.
 We ran these competitions for 2 million updates with mutation disabled.
 We performed 191 replications of this experiment, each taking approximately 6 hours.
