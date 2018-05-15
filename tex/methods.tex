@@ -7,48 +7,59 @@ We will first cover the design of the DISHTINY platform and then describe the si
 
 \input{fig/explanatory.tex}
 
-DISHTINY distributes cell-like organisms across a toroidal grid.
-Over discrete timesteps called ``updates'', the cells collect a single continuous-valued resource.
+DISHTINY allows cell-like organisms to replicate across a toroidal grid.  As cells reproduce, they can optionally share signaling channels with their offspring.
+Over discrete timesteps (``updates''), the cells can collect a continuous-valued resource, either hoarding it or sharing it with others on a signalling channel.
 % @CAO: I changed the -8.0 to just 8.0 since you already specified "cost."
-Once sufficient resource has been accrued, cells may pay a cost of $8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce).
-Any cell existing on that adjoining tile is destroyed and replaced with the daughter cell.
+Once sufficient resource has been accrued, cells may pay $8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce), replacing any existing cell already there.
+%Any cell existing on that adjoining tile is destroyed and replaced with the daughter cell.
 
-As shown at the top of Figure \ref{fig:explanatory}, resources appear in diamond-shaped waves that emanate from a single point.
-With each update, the resource wave advances one grid tile outward, disappearing when it reaches a predefined limit.
-In order to collect resources as they pass, cells must enter an ``activated'' state from their ``resting ready'' state.
-The cell at the starting position of a resource wave is automatically set to the activated state.
-At the next update, this activated cell automatically induces neighboring cells registered to the same signaling channel to enter the activated state and itself transitions to a temporary quiescent state.
-In turn, the newly activated cell activate ready neighbors registered to the same signaling channel and themselves enter a temporary quiescent state.
-In this manner, cells sharing the same signaling channel activate coincident with the expanding resource wave.
-As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell is determined by the size and shape of of its same-channel signaling network;
-small or fragmented same-channel signaling networks will frequently miss out on resource as it passes overhead.
+As shown at the top of Figure \ref{fig:explanatory}, resources appear at a single point and spread in diamond-shaped waves.
+Each update the resource wave advances one grid tile outward, disappearing when it reaches a predefined limit.
+Cells must be in a costly ``activated'' state to collect resource as it passes.
+The cell at the starting position of a resource wave is automatically activated, and will send the activate signal to neighboring cells on the same signaling channel. %, so that they activate on the next update.  % to enter the activated state and itself transitions to a temporary quiescent state.
+The newly activated cells, in turn, activate their own neighbors registered to the same signaling channel.  Each cell, after sending the activation signal, enters a temporary quiescent state so as not to reactivate from the signal.
+In this manner, cells sharing a signaling channel activate %coincident 
+along with the expanding resource wave.
+As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell is determined by the size and shape of of its %same-channel  %@CAO: I realize that "same-channel" is relevent in the code, but we haven't explained the linking between types of resource and signaling channels yet...
+signaling network;
+small or fragmented %same-channel
+signaling networks will frequently miss out on resource as it passes by.
 
-Each cell pays a resource cost when it enters the activated state.
-This cost is outweighed by the resource collected such that cells which activate in concert with a resource wave derive a net benefit.
+Each cell pays a resource cost when it activates. %enters the activated state.
+This cost is outweighed by the resource collected such that cells that activate in concert with a resource wave derive a net benefit.
 Recall, though, that resource waves have a limited extent.
 Cells that activate outside the extent of a resource wave or activate out of sync with the resource wave (due to an indirect path from the cell that originated the signal) pay the activation cost but collect no resource.
 Cells that frequently activate erroneously use up their resource and die.
 In our implementation, organisms that accrue a resource debt of $-11$ or greater are killed.
 This scenario is depicted in Figure \ref{fig:explanatory}$c$.
 
-In this manner, ``Goldilocks'' --- not to small and not too big --- same-channel signaling networks are selected for.
-In our implementation, resource waves are seeded at a single location drawn  with uniform probability from the toroidal grid.
-Based on this location, resource wave seeds are tiled over the toroidal grid such that their limits touch but do not overlap.
-All waves start and are updated synchronously;
-when they complete, the next batch of resource waves is seeded.
-This process ensures that selection for ``Goldilocks'' same-channel signaling networks is uniformly distributed over the toroidal grid.
+In this manner, ``Goldilocks'' --- not to small and not too big --- %same-channel 
+signaling networks are selected for.
+%In our implementation, resource waves are seeded at a single location drawn  with uniform probability from the toroidal grid.
+Based on a randomly chosen starting location, resource wave starting points (seeds) are tiled over the toroidal grid such that their limits touch, but do not overlap.
+All waves start and proceed synchronously;
+when they complete, the next resource waves are seeded.
+This process ensures that selection for ``Goldilocks'' %same-channel
+signaling networks is uniformly distributed over the toroidal grid.
 
-Cells may control the size and shape of their same-channel signaling group by strategic control of reproduction.
-Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or should instead be registered to a random channel ID (in the range 1 to $2^{22}$).
+Cells control the size and shape of their %same-channel
+signaling group by strategicly reproducing. % control of reproduction.
+Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or %should instead be registered to
+be given
+a random channel ID (in the range 1 to $2^{22}$).
 No guarantees are made about the uniqueness of a newly-generated channel ID, but chance collisions are rare.
 
-Hierarchical levels are introduced into the system through multiple completely independent, but overlaid, instantiations of this resource wave/channel-signaling scheme.
+% @CAO: HERE is where we first introduce how multiple channels work; only from here on do we need to worry about talking about "same-channel signalling"
+Hierarchical levels are introduced into the system through multiple, 
+% @CAO: I don't think independent is quite the right word here - probably nested?
+%independent, but overlaid, 
+nested instantiations of this resource wave/channel-signaling scheme.
 We refer to each independent resource wave/channel-signaling system as a ``level.''
-In our experiments, we worked with two resource wave/channel-signaling levels, identified here as level one and level two.
+In our experiments, we allowed two resource wave/channel-signaling levels, identified here as level one and level two.
 On level one, resource waves extended a radius of four toroidal tiles.
 On level two they extended a radius of twelve toroidal tiles.
 On both levels, activated organisms netted $+1.0$ resource from a resource wave, but suffered an activation penalty of $-5.0$ if no resource was available.
-Due to the different radii of resource waves on different levels, level one selects for smaller same-channel signaling networks and level two selects for larger same-channel signaling networks.
+Due to the different radii of resource waves on different levels, level one selects for small same-channel signaling networks and level two selects for large same-channel signaling networks.
 
 We enforced hierarchical nesting of these same-channel signaling networks during reproduction:
 daughter cells may inherit neither channel ID, just the level-two channel ID, or both channel IDs.
