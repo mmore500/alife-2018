@@ -1,23 +1,24 @@
 \section{Methods}
 
-In order to demonstrate that the DISHTINY platform selects for detectable hierarchical transitions in individuality, we performed experiments where cell-like organisms evolved parameters for manually designed strategies controlling relevant aspects of behavior including resource-sharing, reproductive decision-making, and apoptosis.
-We will first cover the design of the DISHTINY platform then move on to describe the simple cell-like organisms we used to evaluate the platform.
+In order to demonstrate that the DISHTINY platform selects for detectable hierarchical transitions in individuality, we performed experiments where cell-like organisms evolved parameters to control manually designed behaviors such as resource-sharing, reproductive decision-making, and apoptosis.
+We will first cover the design of the DISHTINY platform and then describe the simple cell-like organisms we used to evaluate the platform.
 
 \subsection{DISHTINY}
 
 \input{fig/explanatory.tex}
 
-DISHTINY centers around cell-like organisms distributed over a toroidal grid.
-Over discrete timesteps called ``updates,'' the cells collect a single continuous-valued resource.
-Once sufficient resource has been accrued, cells may pay a cost of $-8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce).
+DISHTINY distributes cell-like organisms across a toroidal grid.
+Over discrete timesteps called ``updates'', the cells collect a single continuous-valued resource.
+% @CAO: I changed the -8.0 to just 8.0 since you already specified "cost."
+Once sufficient resource has been accrued, cells may pay a cost of $8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce).
 Any cell existing on that adjoining tile is destroyed and replaced with the daughter cell.
 
 As shown at the top of Figure \ref{fig:explanatory}, resources appear in diamond-shaped waves that emanate from a single point.
-With each simulation update, the resource wave advances one grid tile outward, disappearing when it reaches a predefined limit.
-In order to collect resource as it passes overhead, cells must enter an activated state from their resting ready state.
-The cell at the starting position of a resource wave is automatically set to the activated state from the ready state.
+With each update, the resource wave advances one grid tile outward, disappearing when it reaches a predefined limit.
+In order to collect resources as they pass, cells must enter an ``activated'' state from their ``resting ready'' state.
+The cell at the starting position of a resource wave is automatically set to the activated state.
 At the next update, this activated cell automatically induces neighboring cells registered to the same signaling channel to enter the activated state and itself transitions to a temporary quiescent state.
-Subsequently, the newly activated cell activate ready neighbors registered to the same signaling channel and themselves enter a temporary quiescent state.
+In turn, the newly activated cell activate ready neighbors registered to the same signaling channel and themselves enter a temporary quiescent state.
 In this manner, cells sharing the same signaling channel activate coincident with the expanding resource wave.
 As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell is determined by the size and shape of of its same-channel signaling network;
 small or fragmented same-channel signaling networks will frequently miss out on resource as it passes overhead.
