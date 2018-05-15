@@ -8,24 +8,21 @@ We will first cover the design of the DISHTINY platform and then describe the si
 \input{fig/explanatory.tex}
 
 DISHTINY allows cell-like organisms to replicate across a toroidal grid.  As cells reproduce, they can optionally share signaling channels with their offspring.
-Over discrete timesteps (``updates''), the cells can collect a continuous-valued resource, either hoarding it or sharing it with others on a signalling channel.
-% @CAO: I changed the -8.0 to just 8.0 since you already specified "cost."
+Over discrete timesteps (``updates''), the cells can collect a continuous-valued resource, either hoarding it or sharing it with others on a signaling channel.
 Once sufficient resource has been accrued, cells may pay $8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce), replacing any existing cell already there.
-%Any cell existing on that adjoining tile is destroyed and replaced with the daughter cell.
 
 As shown at the top of Figure \ref{fig:explanatory}, resources appear at a single point and spread in diamond-shaped waves.
 Each update the resource wave advances one grid tile outward, disappearing when it reaches a predefined limit.
 Cells must be in a costly ``activated'' state to collect resource as it passes.
-The cell at the starting position of a resource wave is automatically activated, and will send the activate signal to neighboring cells on the same signaling channel. %, so that they activate on the next update.  % to enter the activated state and itself transitions to a temporary quiescent state.
-The newly activated cells, in turn, activate their own neighbors registered to the same signaling channel.  Each cell, after sending the activation signal, enters a temporary quiescent state so as not to reactivate from the signal.
-In this manner, cells sharing a signaling channel activate %coincident 
-along with the expanding resource wave.
-As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell is determined by the size and shape of of its %same-channel  %@CAO: I realize that "same-channel" is relevent in the code, but we haven't explained the linking between types of resource and signaling channels yet...
-signaling network;
-small or fragmented %same-channel
-signaling networks will frequently miss out on resource as it passes by.
+The cell at the starting position of a resource wave is automatically activated, and will send the activate signal to neighboring cells on the same signaling channel.
+The newly activated cells, in turn, activate their own neighbors registered to the same signaling channel.
+Neighbors registered to other signaling channels do not activate.
+Each cell, after sending the activation signal, enters a temporary quiescent state so as not to reactivate from the signal.
+In this manner, cells sharing a signaling channel activate in concert with the expanding resource wave.
+As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell is determined by the size and shape of of its same-channel signaling network;
+small or fragmented same-channel signaling networks will frequently miss out on resource as it passes by.
 
-Each cell pays a resource cost when it activates. %enters the activated state.
+Each cell pays a resource cost when it activates.
 This cost is outweighed by the resource collected such that cells that activate in concert with a resource wave derive a net benefit.
 Recall, though, that resource waves have a limited extent.
 Cells that activate outside the extent of a resource wave or activate out of sync with the resource wave (due to an indirect path from the cell that originated the signal) pay the activation cost but collect no resource.
@@ -33,35 +30,28 @@ Cells that frequently activate erroneously use up their resource and die.
 In our implementation, organisms that accrue a resource debt of $-11$ or greater are killed.
 This scenario is depicted in Figure \ref{fig:explanatory}$c$.
 
-In this manner, ``Goldilocks'' --- not to small and not too big --- %same-channel 
-signaling networks are selected for.
-%In our implementation, resource waves are seeded at a single location drawn  with uniform probability from the toroidal grid.
-Based on a randomly chosen starting location, resource wave starting points (seeds) are tiled over the toroidal grid such that their limits touch, but do not overlap.
+In this manner, ``Goldilocks'' --- not to small and not too big --- signaling networks are selected for.
+Based on a randomly chosen starting location, resource wave starting points (seeds) are tiled over the toroidal grid such that the extents of the resource waves touch, but do not overlap.
 All waves start and proceed synchronously;
 when they complete, the next resource waves are seeded.
-This process ensures that selection for ``Goldilocks'' %same-channel
-signaling networks is uniformly distributed over the toroidal grid.
+This process ensures that selection for ``Goldilocks'' same-channel signaling networks is uniformly distributed over the toroidal grid.
 
-Cells control the size and shape of their %same-channel
-signaling group by strategicly reproducing. % control of reproduction.
-Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or %should instead be registered to
-be given
-a random channel ID (in the range 1 to $2^{22}$).
+Cells control the size and shape of their same-channel signaling group through strategic reproduction.
+Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or be given a random channel ID (in the range 1 to $2^{22}$).
 No guarantees are made about the uniqueness of a newly-generated channel ID, but chance collisions are rare.
 
-% @CAO: HERE is where we first introduce how multiple channels work; only from here on do we need to worry about talking about "same-channel signalling"
-Hierarchical levels are introduced into the system through multiple, 
-% @CAO: I don't think independent is quite the right word here - probably nested?
-%independent, but overlaid, 
-nested instantiations of this resource wave/channel-signaling scheme.
+% @CAO: HERE is where we first introduce how multiple channels work; only from here on do we need to worry about talking about "same-channel signaling"
+% @MAM: I think there is some confusion about channel vs. level...
+Hierarchical levels are introduced into the system through multiple separate, but overlaid, instantiations of this resource wave/channel-signaling scheme.
 We refer to each independent resource wave/channel-signaling system as a ``level.''
 In our experiments, we allowed two resource wave/channel-signaling levels, identified here as level one and level two.
 On level one, resource waves extended a radius of four toroidal tiles.
 On level two they extended a radius of twelve toroidal tiles.
-On both levels, activated organisms netted $+1.0$ resource from a resource wave, but suffered an activation penalty of $-5.0$ if no resource was available.
+On both levels, activated cells netted $+1.0$ resource from a resource wave, but suffered an activation penalty of $-5.0$ if no resource was available.
 Due to the different radii of resource waves on different levels, level one selects for small same-channel signaling networks and level two selects for large same-channel signaling networks.
 
-We enforced hierarchical nesting of these same-channel signaling networks during reproduction:
+Cells were marked with two separate channel IDs, one for level one and another for level two.
+We enforced hierarchical nesting of same-channel signaling networks during reproduction:
 daughter cells may inherit neither channel ID, just the level-two channel ID, or both channel IDs.
 Daughter cells may not inherit only the level-one channel ID while having a different level-two channel ID.
 The distribution of IDs across the level-two and level-one channels can be envisioned by analogy to political countries and territories.
@@ -86,44 +76,38 @@ We performed our experiments using cell-like organisms composed of 15 floating-p
 These particular cell-like organisms are in no way inherent to the DISHTINY platform, but were merely developed to study transitions using as simple a models system as feasible.
 On reproduction, we applied mutation to each parameter independently with probability $0.00005$.
 
-The \textbf{aversion parameters} ($A_1$ and $A_2$) allow cells to avoid reproducing over neighbors sharing the same signaling channel.
+The \textbf{aversion parameters} ($\bm{A_1}$ and $\bm{A_2}$) allow cells to avoid reproducing over neighbors sharing the same signaling channel.
 Specifically, they control the probability that a cell declines to supplant a neighbor sharing the same level-one ($A_1$) or level-two ($A_2$) channel ID.
-If a cell declines to place its offspring in all four adjoining tiles, it decides not to %pay the resource cost to reproduce and does not 
-reproduce.
+If a cell declines to place its offspring in all four adjoining tiles, it decides not to reproduce.
 Mutation is performed by a redraw from the uniform distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
-%Resource allocation is controlled by the $P_{c}$, $P_1$, and $P_2$ parameters.
-The \textbf{resource allocation parameters} the proportion of resources that go to the cell's stockpile ($P_{c}$), its level-1 channel's resource pool ($P_1$), or its level-2 channel's resource pool ($P_2$).
-%The $P_{c}$ parameter controls the proportion of resource collected into and paid from a cell's individual resource stockpile, while the $P_1$ and $P_2$ parameters, respectively, control the proportion of resources going into and out of resource pools shared by organisms with identical level-one and level-two channel IDs.
+The \textbf{resource allocation parameters} control the proportion of resources that go to the cell's stockpile ({$\bm{P_{c}}$), its level-one channel's resource pool ($\bm{P_1}$), or its level-two channel's resource pool ($\bm{P_2}$).
 These parameters are initialized by a draw from $U(0.0, 1.0)$ and mutated by addition of a normal value drawn from $N(0.0,0.2)$ with the result clamped to the range $[0,1]$.
 The set $P_{c}, P_1, P_2$ is always normalized to sum to 1.
-%@CAO: I assume you make sure they're not all 0?  You don't need to say anything about that here.
 
 Channel resource pools are identical to an organism's individual stockpile, except that any deficit is distributed evenly among the individual organism's stockpile.
 On every update, cells can spend from their individual stockpile to reproduce or from a channel pool, with priority given to cells nearest to the centroid of that pool's members.
 As such, pool-funded reproduction fills in a same-channel signaling network from the inside out and help produce diamond-shaped same-channel signaling networks.
 (Distance is measured using the taxicab metric.)
 
-\textbf{
-Channel caps} $C_1$ and $C_2$ regulate the size of same-channel signaling networks.
+\textbf{Channel cap parameters} $\bm{C_1}$ and $\bm{C_2}$ regulate the size of same-channel signaling networks.
 When an organism reproduces, it checks the size of its level-one signaling network against $C_1$ and the size of its level-two signaling group against $C_2$.
 If neither cap is met or exceeded, then the organism will produce an offspring sharing both of its channel IDs.
 If only the $C_1$ cap is exceeded, then the organism will produce an offspring with new level-one channel ID but identical level-two channel ID.
 Finally, if the $C_2$ cap is exceeded, then the organism will produce an offspring with new IDs for both channels.
 These parameters are initialized by a draw from $U(0.0, 48.0)$ and mutated by addition of a value drawn from $N(0.0,24.0)$ with the result clamped to be non-negative.
 
-The \textbf{endowment parameters} $E_{c}$, $E_1$, and $E_2$ determine the amount of resource provided to offspring.
+The \textbf{endowment parameters} $\bm{E_{c}}$, $\bm{E_1}$, and $\bm{E_2}$ determine the amount of resource provided to offspring.
 This endowment is paid as an additional cost by the cell stockpile (or same-channel resource pool) funding a reproduction.
-The full amount of the received endowment is divided between the daughter cell's stockpile, level-one same-channel resource pool, and level-two same-channel resource pool according to the offspring's resource allocation parameters. % $P_{c}$, $P_1$, and $P_2$.
-%Specifically, 
-$E_{c}$ is the endowment amount paid to an offspring that shares both channel IDs of the parent;
-$E_1$ is the endowment paid to an offspring that shares just the level-two channel ID of the parent;
-and $E_2$ is the endowment paid to an offspring that shares neither the level-one nor level-two channel ID of the parent.
+The full amount of the received endowment is divided between the daughter cell's stockpile, level-one same-channel resource pool, and level-two same-channel resource pool according to the offspring's resource allocation parameters.
+$\bm{E_{c}}$ is the endowment amount paid to an offspring that shares both channel IDs of the parent;
+$\bm{E_1}$ is the endowment paid to an offspring that shares just the level-two channel ID of the parent;
+and $\bm{E_2}$ is the endowment paid to an offspring that shares neither the level-one nor level-two channel ID of the parent.
 Endowed resources help new-channel propagules to rapidly grow their signaling network in order to begin collecting resource at a rate competitive to other well-established same-channel signaling networks.
 These parameters are initialized by a draw from $U(0.0, 3.0)$ and are mutated by addition of a value drawn from $N(0.0,10.0)$ with the result clamped to be non-negative.
 
 
-Parameters $M_{c}$, $M_1$, and $M_2$ control the \textbf{apoptosis response to mutation}.
+Parameters $\bm{M_{c}}$, $\bm{M_1}$, and $\bm{M_2}$ control the \textbf{apoptosis response to mutation}.
 Each time that a mutation occurs during reproduction, the mutated offspring attempts suicide with probability $M_{c}$ if it shares both channel IDs of its parent, probability $M_1$ if it shares just the level-two channel ID of its parent, and probability $M_2$ if it shares neither channel ID of the parent.
 The $M_x$ value applied is from the offspring's genotype after mutation.
 Attempted suicide succeeds 80\% of the time.
@@ -131,11 +115,10 @@ This capacity enables first- or second-level individuals to combat somatic mutat
 Initialization and mutation each of these parameters is performed by a redraw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 
-Finally, parameters $S_1$ and $S_2$ \textbf{fine-tune site choice for offspring placement}.
+Finally, parameters $\bm{S_1}$ and $\bm{S_2}$ \textbf{fine-tune site choice for offspring placement}.
 If an organism is placing an offspring with identical channel IDs, with probability $S_1$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-one signaling network.
 If an organism is placing an offspring with identical level-two channel ID but different level-one channel ID, with probability $S_2$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-two same-channel signaling network.
 Otherwise, the four possible sites for offspring placement are considered in a random order.
-%These parameters were included to enable more precise control of reproductive behavior.
 Initialization and mutation are performed by a draw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 \subsection{Experiments}
@@ -146,13 +129,11 @@ We performed 33 replications of this experiment, each taking approximately 60 ho
 Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 11.3 with a standard deviation of 1.9 cellular generations per 10,000 updates.
 
 We observed evolutionary outcomes that resembled cell-, first-, and second-level individuality.
-To assess the relative fitness of these evolved organisms, we ran %ecological
- competitions between three genotypes --- one selected as the most common genotype from the evolutionary run where the greatest mean $P_{c}$ was observed (i.e., cell-level individuality was observed), one selected as the most common genotype from the evolutionary run where the greatest mean $P_1$ was observed (i.e., first-level individuality was observed), and the other selected as the most common genotype from the evolutionary run where the greatest mean $P_2$ was observed (i.e., second-level individuality observed).
-We seeded each %ecological run
-competition with three copies of each genotype, uniformly spaced over the $120 \times 120$ toroidal grid with random arrangement.
-%We ran these competitions .
+To assess the relative fitness of these evolved organisms, we ran competitions between three genotypes --- one selected as the most common genotype from the evolutionary run where the greatest mean $P_{c}$ was observed (i.e., cell-level individuality was observed), one selected as the most common genotype from the evolutionary run where the greatest mean $P_1$ was observed (i.e., first-level individuality was observed), and the other selected as the most common genotype from the evolutionary run where the greatest mean $P_2$ was observed (i.e., second-level individuality observed).
+We seeded each competition with three copies of each genotype, uniformly spaced over the $120 \times 120$ toroidal grid with random arrangement.
 We performed 191 runs in this experiment, each running for 2 million updates with mutation disabled, taking approximately 6 hours.
 
 \subsection{Implementation}
 
-We implemented our experimental system using the Empirical library for scientific software development in C++, available at \url{https://github.com/devosoft/Empirical}.  The code used to perform and analyze our experiments, our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/ewvg8/}.
+We implemented our experimental system using the Empirical library for scientific software development in C++, available at \url{https://github.com/devosoft/Empirical}.
+The code used to perform and analyze our experiments, our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/ewvg8/}.
