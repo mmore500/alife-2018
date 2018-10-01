@@ -45,8 +45,8 @@ No guarantees are made about the uniqueness of a newly-generated channel ID, but
 Hierarchical levels are introduced into the system through multiple separate, but overlaid, instantiations of this resource wave/channel-signaling scheme.
 We refer to each independent resource wave/channel-signaling system as a ``level.''
 In our experiments, we allowed two resource wave/channel-signaling levels, identified here as level one and level two.
-On level one, resource waves extended a radius of four toroidal tiles.
-On level two they extended a radius of twelve toroidal tiles.
+On level one, resource waves extended a radius of three toroidal tiles.
+On level two they extended a radius of 24 toroidal tiles.
 On both levels, activated cells netted $+1.0$ resource from a resource wave, but suffered an activation penalty of $-5.0$ if no resource was available.
 Due to the different radii of resource waves on different levels, level one selects for small same-channel signaling networks and level two selects for large same-channel signaling networks.
 
@@ -82,7 +82,7 @@ If a cell declines to place its offspring in all four adjoining tiles, it decide
 Mutation is performed by a redraw from the uniform distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 The \textbf{resource allocation parameters} control the proportion of resources that go to the cell's stockpile ({$\bm{P_{c}}$), its level-one channel's resource pool ($\bm{P_1}$), or its level-two channel's resource pool ($\bm{P_2}$).
-These parameters are initialized by a draw from $U(0.0, 1.0)$ and mutated by addition of a normal value drawn from $N(0.0,0.2)$ with the result clamped to the range $[0,1]$.
+These parameters are initialized by a draw from $U(-1.0, 2.0)$ clamped to the range $[0,1]$ and mutated by addition of a normal value drawn from $N(0.0,0.2)$ with the result clamped to the range $[0,1]$.
 The set $P_{c}, P_1, P_2$ is always normalized to sum to 1.
 
 Channel resource pools are identical to an organism's individual stockpile, except that any deficit is distributed evenly among the individual organism's stockpile.
@@ -95,7 +95,9 @@ When an organism reproduces, it checks the size of its level-one signaling netwo
 If neither cap is met or exceeded, then the organism will produce an offspring sharing both of its channel IDs.
 If only the $C_1$ cap is exceeded, then the organism will produce an offspring with new level-one channel ID but identical level-two channel ID.
 Finally, if the $C_2$ cap is exceeded, then the organism will produce an offspring with new IDs for both channels.
-These parameters are initialized by a draw from $U(0.0, 48.0)$ and mutated by addition of a value drawn from $N(0.0,24.0)$ with the result clamped to be non-negative.
+For level 1 caps, these parameters are initialized by a draw from $U(0.0, 16.0)$.
+For level 2 caps, these parameters are initialized by a draw from $U(0.0, 128.0)$.
+Both are mutated by addition of a value drawn from $N(0.0,24.0)$ with the result clamped to be non-negative.
 
 The \textbf{endowment parameters} $\bm{E_{c}}$, $\bm{E_1}$, and $\bm{E_2}$ determine the amount of resource provided to offspring.
 This endowment is paid as an additional cost by the cell stockpile (or same-channel resource pool) funding a reproduction.
@@ -104,16 +106,18 @@ $\bm{E_{c}}$ is the endowment amount paid to an offspring that shares both chann
 $\bm{E_1}$ is the endowment paid to an offspring that shares just the level-two channel ID of the parent;
 and $\bm{E_2}$ is the endowment paid to an offspring that shares neither the level-one nor level-two channel ID of the parent.
 Endowed resources help new-channel propagules to rapidly grow their signaling network in order to begin collecting resource at a rate competitive to other well-established same-channel signaling networks.
-These parameters are initialized by a draw from $U(0.0, 3.0)$ and are mutated by addition of a value drawn from $N(0.0,10.0)$ with the result clamped to be non-negative.
-
+In order to provide that adequate resource remained to ensure parental stability, endowment was paid out only after twice the endowment amount had been accrued (leaving an amount of resource equal to the endowment remaining with the parent).
+Cell level endowments are initialized by a draw from $U(0.0, 5.0)$.
+Level-one endowments are initialized by a draw from $U(0.0, 80.0)$.
+Level-two endowments are initialized by a draw from $U(0.0,405.0)$.
+All endowments are mutated by addition of a value drawn from $N(0.0,10.0)$ with the result clamped to be non-negative
 
 Parameters $\bm{M_{c}}$, $\bm{M_1}$, and $\bm{M_2}$ control the \textbf{apoptosis response to mutation}.
 Each time that a mutation occurs during reproduction, the mutated offspring attempts suicide with probability $M_{c}$ if it shares both channel IDs of its parent, probability $M_1$ if it shares just the level-two channel ID of its parent, and probability $M_2$ if it shares neither channel ID of the parent.
 The $M_x$ value applied is from the offspring's genotype after mutation.
-Attempted suicide succeeds 80\% of the time.
+Attempted suicide succeeds 90\% of the time.
 This capacity enables first- or second-level individuals to combat somatic mutation.
 Initialization and mutation each of these parameters is performed by a redraw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
-
 
 Finally, parameters $\bm{S_1}$ and $\bm{S_2}$ \textbf{fine-tune site choice for offspring placement}.
 If an organism is placing an offspring with identical channel IDs, with probability $S_1$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-one signaling network.
@@ -123,23 +127,24 @@ Initialization and mutation are performed by a draw from the distribution $U(-0.
 
 \subsection{Experiments}
 
-We performed experiments to assess the evolutionary trajectories of populations in the DISHTINY platform environment.
+We performed experiments to assess the evolutionary trajectories of populations in DISHTINY.
 We seeded each tile on the $120 \times 120$ toroidal grid with a randomized organism and ran the simulation for 20 million updates.
 In order to facilitate turnover, we culled the population intermittently.
-Every 50,000 updates following update 500,000, we randomly selected Level 2 channel IDs and killed all cells with that channel ID until at least 5\% of grid tiles were empty.
-We performed 50 replications of this experiment.
+Starting at update 500,000, and every 50,000 updates thereafter, we randomly selected Level 2 channel IDs and killed all cells with that channel ID, continuing until at least 5\% of grid tiles were empty.
+We performed 50 replicates within this treatment.
+On average, each cellular generation took just over 500 updates.
 Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 19.2 with a standard deviation of 2.7 cellular generations per 10,000 updates.
 
 In order to detangle the impact of same-channel signaling networks with respect to kin recognition and with respect to cooperation to increase resource collection rate, we performed control evolutionary trials where same-channel signaling networks did not improve cellular resource collection rate.
-Under control conditions, same-channel signaling networks just help cells recognize other related cells.
-In our implementation, this corresponded to resource waves with a radius 1 (i.e., the resource wave did not expand beyond its seed), a value of 1.0 resource, and zero erroneous activation cost.
-All lifestyle parameters functioned identically to standard conditions.
-We seeded each tile on the $120 \times 120$ toroidal grid with a randomized organism, ran the simulation for 20 million updates, and performed culls identically to the standard experimental conditions.
-We performed 50 replications of this experiment.
+Under control conditions, same-channel signaling networks just helped cells recognize other related cells.
+In our implementation, this treatment corresponded to resource waves with radius 1 (i.e., the resource wave did not expand beyond its seed) that paid out 1.0 resource unit to cells and zero cost for erroneous activation.
+All other aspects of control runs, including the functionality of all lifestyle parameters, were otherwise identical to standard conditions.
+We performed 50 replications of the control treatment.
+In control runs, generations progressed much faster, taking only around 50 updates.
 Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 211.1 with a standard deviation of 43.8 cellular generations per 10,000 updates.
 Higher resource inflow rate under the control conditions likely contributed the faster cellular generation rate compared to the control conditions.
 
-We observed a spectrum of evolved resource-caching strategies.
+In standard evolutionary runs, we observed a spectrum of evolved resource-caching strategies.
 To assess the relative fitness of these evolved organisms, we ran competitions between the most common genotype from three standard evolutionary runs.
 The first genotype allocated resource exclusively to its first-level same-channel resource pool (i.e., $P_{1} = 1.0$), the second split resource evenly between its first-level and second-level resource pool (i.e., $P_{1} = P_{2} = 0.5$), and the third allocated resource primarily to the second-level resource pool (i.e., $P_{2} > P_{1}$).
 (No most-common genotypes allocated resource exclusively to the second-level resource pool).
