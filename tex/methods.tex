@@ -125,13 +125,27 @@ Initialization and mutation are performed by a draw from the distribution $U(-0.
 
 We performed experiments to assess the evolutionary trajectories of populations in the DISHTINY platform environment.
 We seeded each tile on the $120 \times 120$ toroidal grid with a randomized organism and ran the simulation for 20 million updates.
-We performed 33 replications of this experiment, each taking approximately 60 hours.
-Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 11.3 with a standard deviation of 1.9 cellular generations per 10,000 updates.
+In order to facilitate turnover, we culled the population intermittently.
+Every 50,000 updates following update 500,000, we randomly selected Level 2 channel IDs and killed all cells with that channel ID until at least 5\% of grid tiles were empty.
+We performed 50 replications of this experiment.
+Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 19.2 with a standard deviation of 2.7 cellular generations per 10,000 updates.
 
-We observed evolutionary outcomes that resembled cell-, first-, and second-level individuality.
-To assess the relative fitness of these evolved organisms, we ran competitions between three genotypes --- one selected as the most common genotype from the evolutionary run where the greatest mean $P_{c}$ was observed (i.e., cell-level individuality was observed), one selected as the most common genotype from the evolutionary run where the greatest mean $P_1$ was observed (i.e., first-level individuality was observed), and the other selected as the most common genotype from the evolutionary run where the greatest mean $P_2$ was observed (i.e., second-level individuality observed).
+In order to detangle the impact of same-channel signaling networks with respect to kin recognition and with respect to cooperation to increase resource collection rate, we performed control evolutionary trials where same-channel signaling networks did not improve cellular resource collection rate.
+Under control conditions, same-channel signaling networks just help cells recognize other related cells.
+In our implementation, this corresponded to resource waves with a radius 1 (i.e., the resource wave did not expand beyond its seed), a value of 1.0 resource, and zero erroneous activation cost.
+All lifestyle parameters functioned identically to standard conditions.
+We seeded each tile on the $120 \times 120$ toroidal grid with a randomized organism, ran the simulation for 20 million updates, and performed culls identically to the standard experimental conditions.
+We performed 50 replications of this experiment.
+Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 211.1 with a standard deviation of 43.8 cellular generations per 10,000 updates.
+Higher resource inflow rate under the control conditions likely contributed the faster cellular generation rate compared to the control conditions.
+
+We observed a spectrum of evolved resource-caching strategies.
+To assess the relative fitness of these evolved organisms, we ran competitions between the most common genotype from three standard evolutionary runs.
+The first genotype allocated resource exclusively to its first-level same-channel resource pool (i.e., $P_{1} = 1.0$), the second split resource evenly between its first-level and second-level resource pool (i.e., $P_{1} = P_{2} = 0.5$), and the third allocated resource primarily to the second-level resource pool (i.e., $P_{2} > P_{1}$).
+(No most-common genotypes allocated resource exclusively to the second-level resource pool).
 We seeded each competition with three copies of each genotype, uniformly spaced over the $120 \times 120$ toroidal grid with random arrangement.
-We performed 191 runs in this experiment, each running for 2 million updates with mutation disabled, taking approximately 6 hours.
+Each competition lasted 2 million updates.
+We performed 50 runs in this experiment.
 
 \subsection{Implementation}
 
@@ -144,8 +158,8 @@ Lines appear to be missing in contiguous sections (corresponding to contiguous u
 Except where explicitly noted, missing data is not relevant to our analyses and visualizations, which primarily describe end-states where data from all runs is available.
 Due to checkpoint-restart failures, we curtailed our standard-condition evolutionary runs from a planned 25M to 20M updates and our control evolutionary runs to 250k updates.
 
-Each replicate of standard evolutionary experiments required approximately six days of compute time to reach 20M updates.
-Each replicate of control evolutionary experiments expended on the order of one day of compute time to reach 250k updates.
+Each replicate of standard evolutionary experiments required approximately six days of compute time to reach 20 million updates.
+Each replicate of control evolutionary experiments expended on the order of one day of compute time to reach 250 thousand updates.
 Control runs were slower than standard runs, likely due to a higher per-update cellular generation rate.
 Each replicate of competition experiments consumed approximately ten hours of compute time.
 For standard evolutionary experiments, data processing required approximately four hours of compute time per run.
