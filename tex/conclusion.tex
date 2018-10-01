@@ -1,22 +1,24 @@
 \section{Conclusion}
 
 Using simple organisms that evolve parameters for a set of manually-designed strategies, we have demonstrated that DISHTINY selects for genotypes that exhibit high-level individuality.
-We observed cell-, first-, and second- level individuality among evolutionary outcomes.
+We observed a spectrum of first- and second- level individuality among evolutionary outcomes.
 Specifically, we observed
 \begin{enumerate}
-  \item reproductive division of labor among members of the same channel (i.e., individuals enveloped in a same-channel signaling network ceded reproduction to those at the periphery), and
-  \item cooperation between members of the same channel (i.e., pooling of resource on same-channel signaling networks).
+  \item reproductive division of labor among members of the same channel (i.e., individuals enveloped in a same-channel signaling network ceded reproduction to those at the periphery),
+  \item cooperation between members of the same channel (i.e., pooling of resource on same-channel signaling networks),
+  \item reproductive bottlenecking (i.e., groups of cells sharing a channel ID descend from a single originator of that channel ID), and
+  \item selection for apoptosis response to mutation coincident with higher-level individuality.
 \end{enumerate}
 
-Competition experiments revealed that second-level individuals usually outcompete first- and cell-level individuals.
+Competition experiments revealed that second-level individuals usually outcompete lower-level individuals.
 We observed suppression of somatic mutation through apoptosis correlated with second-level individuality.
 The magnitude of resource endowment for propagules was also correlated with second-level individuality.
 
-Although shifts in individuality coincident with level-one and level-two signaling networks were both clearly observed, the question of whether these transitions were truly hierarchical in nature is debatable.
+Although shifts in individuality coincident with level-one and level-two signaling networks were both observed, the question of whether these transitions were truly hierarchical in nature is debatable.
 That is, it is not clear whether level-one individuality was to some extent preserved in or necessary for the emergence of level-two individuality.
 Given the nature of the manually-designed strategies for resource-pooling and reproductive division of labor, level-two resource pooling and division of labor could readily leapfrog over level-one resource pooling and division of labor and, in many ways, seemed to completely supersede those level-one efforts.
 
-We believe that this is a shortcoming of the design of the simple cell-like organism employed in these experiments, not the DISHTINY platform itself.
+We believe that this is a shortcoming of the manual design of lifestyle strategies for which simple cell-like organisms evolved parameters, not the DISHTINY platform itself.
 We have nevertheless demonstrated that DISHTINY ultimately selects for high-level individuality.
 We are eager to work with more sophisticated cell-like organisms capable of arbitrary computation via genetic programming in order to pursue more open-ended evolutionary experiments.
 We will also test the implications of relaxing current arbitrary restrictions that artificially promote transitions, such as the hierarchical nesting of same-channel signaling networks and the explicitly-defined signaling networks themselves, leaving these details to evolution to figure out.
@@ -29,4 +31,4 @@ Importantly, the platform is implemented in a decentralized manner and can comfo
 Parallel computing is widely exploited in evolutionary computing, where subpopulations are farmed out for periods of isolated evolution or single genotypes are farmed out for fitness evaluation
 \citep{lin1994coarse, real17a}.
 DISHTINY presents a more fundamental parallelization potential: principled parallelization of the evolving individual phenotype at arbitrary scale (i.e., a high-level individual as a large collection of individual cells on the toroidal grid).
-Such parallelization will be key to realizing evolving computational systems with scale --- and, perhaps, complexity --- approaching those of biological systems.
+Such parallelization will be key to realizing evolving computational systems with scale --- and, perhaps, complexity --- approaching biological systems.
