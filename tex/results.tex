@@ -8,16 +8,15 @@
 
 \input{fig/grid_progression.tex}
 
-A spectrum of resource allocation strategies were observed at the conclusion of different runs of our evolutionary simulation (mean generation 37,168; $s=4,684$).
-We interpret these outcomes as ranging between first-level and second-level individuality.
-The criteria used to discern these outcomes are described below.
+A spectrum of resource allocation strategies ranging from purely allocation to level-one same-channel resource pools to primarily allocation to level-two same-channel resource pools were observed at the conclusion of different runs of our evolutionary simulation (mean generation 37,168 with standard deviation 4,684).
+We interpret these outcomes as ranging between individuality at the level of first-level same-channel groups to individuality at the level of second-level same-channel groups.
 Figure \ref{fig:outcome_grids} shows the level-one and level-two signaling networks at the end of runs where first-, split-, and second-level resource allocation evolved, respectively.
 First-level allocators form somewhat irregular level-two amalgamations of diverse level-one networks.
 Second-level allocators form highly regular diamond-shaped level-two signaling networks.
 Split-allocation individuals exhibit a level-two phenotype of intermediate regularity.
 Figure \ref{fig:grid_progression} shows a time series of signaling network snapshots in an evolutionary run where second-level individuality evolved.
 
-Figure \ref{fig:genotypes} describes predominant genotypes observed at the end of our evolutionary simulations.
+Figure \ref{fig:genotypes} summarizes predominant genotypes observed at the end of our evolutionary simulations.
 All evolved genotypes had $A_2$ fixed at $1.0$.
 So, reproduction over cells sharing the same level-two channel was universally avoided;
 genotypes evolved so that cells declined to reproduce when they were located at the interior of level-two same-channel signaling networks.
@@ -27,10 +26,11 @@ Most-abundant genotypes at the end of nine evolutionary runs exclusively cached 
 We observed strategies where resource was primarily, but not entirely, cached in an organism's level-one signaling network pool (i.e., $1.0 > P_1 > P_2$) as the most-abundant genotype at the end of seven evolutionary runs.
 In one run, the most-abundant final genotype split resources evenly between an organism's level-one and level-two signaling network pool ($P_1 = P_2 = 0.5$).
 Finally, we observed strategies where resource was primarily, but not entirely, cached in an organism's level-two signaling network pool (i.e., $1.0 > P_2 > P_1$) as the most-abundant genotype at the end of 33 evolutionary runs.
-We suspect that a trade-off between growth rate and long-term stability contributed to our observation of split resource sharing strategies.
+
+We suspect that a trade-off between growth rate and long-term stability prompted the universal allocation of at least some resource to level-one pools and/or cell stockpiles.
 Cell- and level-one resource caching might function something like saving for a rainy day.
-Because reproduction over level-two channel-mates was universally avoided, cells and level-one same-channel networks situated at the interior of a larger level-two same-channel network do not expend their resource pools unless the larger level-one same-channel network is damaged, exposing them to directly-adjacent cells of a different level-one channel.
-Thus, resource accumulates in cells and level-one pools until the level-one same-channel network comes under stress.
+Because reproduction over level-two channel-mates was universally avoided, cells and level-one same-channel networks situated at the interior of a larger level-two same-channel network do not expend their resource pools unless that larger level-two same-channel network is damaged, exposing them to directly-adjacent cells of a different level-two channel.
+Thus, resource accumulates in cell stockpiles and level-one pools until the level-two same-channel network comes under stress.
 Split allocation might also represent hedging against defection of a second-level channel-mate by via somatic mutation.
 
 Indeed, we did observe selection for apoptosis in the 41 replicates where the dominant genotype employed second-level resource caching.
@@ -44,13 +44,13 @@ This result suggests that second-level individuals, in particular, relied on apo
 
 We also assessed whether higher-level individuals provided larger resource endowments to their second-level propagules (offspring sharing neither the level-one nor the level-two channel ID with the parent).
 We examined the relationship between first and second-level resource pooling and dominant genotype second-level propagule endowment at the conclusion of our 50 replicate evolutionary trials.
-We observed a significant negative correlation between dominant genotype $P_1$ and $E_2$ ($p < 0.05$; bootstrap test) and a significant positive correlation between dominant genotype $P_2$ and $E_2$ ($p <  0.005$; bootstrap test).
+We observed a significant negative correlation between dominant genotype $P_1$ and $E_2$ ($p < 0.05$; bootstrap test) and a significant positive correlation between dominant genotype $P_2$ and $E_2$ ($p <  0.05$; bootstrap test).
 Second-level individuals might provide larger endowments to propagules simply due to a greater capacity to collect resource or perhaps because of stronger selection for well-endowed offspring when competing against other second-level individuals.
 
-This result prompts the reverse question: do lower-level individuals provide  larger resource endowments to first-level propagules (offspring that do not share level-one channel ID with the parent but may or may not share level-two channel ID with the parent).
+This result prompts the reverse question: do lower-level individuals provide  larger resource endowments to first-level propagules (offspring that do not share level-one channel ID with the parent but may or may not share level-two channel ID with the parent)?
 Indeed, we observed a significant positive correlation between first-level resource sharing and first-level endowment ($p < 0.0001$; bootstrap test) and a significant negative correlation between second-level resource sharing and first-level endowment ($p < 0.0001$; bootstrap test).
 Cells that pool resource with their smaller level-one same-channel group tend to invest more heavily into the direct offshoots of their level-one same-channel group than cells that pool resource with their larger level-two same-channel group.
-This observation suggests that, although cells do not directly displace their level-one channel-mates, competitive dynamics between may be at play more conservative
+This observation suggests that, although cells do not directly displace their level-one channel-mates, competitive dynamics between may be at play.
 
 \subsection{Competition Experiments}
 
