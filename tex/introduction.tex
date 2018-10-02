@@ -6,18 +6,26 @@ This particular issue is often described as ``open-ended evolution.''
 Although precise definitions and measures of open-ended evolution are still being established, this term is generally understood to refer to evolving systems that exhibit the continued production of novelty \citep{taylor2016open}.
 Evolutionary transitions in individuality, which are key to the complexification and diversification of biological life \citep{smith1997major}, have been highlighted as key research targets with respect to the question of open-ended evolution \citep{ray1996evolving, banzhaf2016defining}.
 In an evolutionary transition of individuality, a new, more complex replicating entity is derived from the combination of cooperating replicating entities that have irrevocably entwined their long-term fates \citep{west2015major}.
+In particular, we focus on fraternal transition in individuality, events where closely-related kin come together or stay together to form a higher-level organism \cite{queller1997cooperators}.
 Eusocial insect colonies and multicellular organisms exemplify this phenomenon \citep{smith1997major}.
 Like the definition of open-ended evolution, the notion of what constitutes an evolving individual is not concretely established.
 Commonly indicated features include:
 close coordination and cooperation, reproductive division of labor, reproductive bottlenecks, and loss of ability to replicate independently
 \citep{ereshefsky2015rethinking, bouchard2013symbiotic}.
-% @CAO: I wasn't sure how reproductive lineages could be see to shift without first recognizing the transition...
-%reproductive lineages (e.g., parent-offspring relationships) at the level of the ensemble
+
+Our appreciation of fraternal transitions in individuality benefits from experimental work inducing and characterizing multicellularity.
+In the biological domain, Ratcliff et al. have demonstrated evolution of multicellularity in yeast, deriving fraternal clusters daughter cells that cling together in order to maximize their settling rate \cite{ratcliff2012experimental}.
+The contributions of Goldsby and collaborators are particularly notable among computational Artificial life work in multicellularity.
+Their evolutionary experiments track a population composed of demes, distinct spatial domains inhabited by clonal groups of cells.
+Two distinct types of reproduction occur: (1) cells reproduce within demes and (2) deme reproduction, where a target deme is sterilized then re-innoculated with genetic material from the parent deme.
+With such methods, Goldsby et al. have studied division of labor \cite{goldsby2010evolution, goldsby2012task}, the origin of soma \cite{goldsby2014evolutionary}, and the evolution of morphological development \cite{goldsby2017increasing}.
+We aspire to complement deme-based approaches with a framework in under which unfold viaw cellular reproductions within a single unified space.
+In particular, we are interested in the potential for such a system to undergo nested hierarchical transitions.
 
 Major challenges in studying evolutionary transitions in individuality include (1) determining the environmental conditions that will promote such a transition and then (2) recognizing that a transition has occurred.
 In order to begin exploring transitions in individuality, we must devise a system in which we expect such transitions to occur repeatably and in a detectable manner.
 Once we can consistently induce and observe evolutionary transitions in individuality, we may subsequently proceed to relax aspects of such a system to explore in greater detail what conditions are necessary to induce transitions and how transitions can be detected.
-For now, we will focus on these initial goals in the context of fraternal transitions in individuality --- events where closely-related kin come together or stay together to form a higher-level organism.
+For now, we will focus on these initial goals in the context of fraternal transitions in individuality.
 
 To this end, we introduce the DISHTINY (DIStributed Hierarchical Transitions in IndividualitY) platform, which seeks to achieve the evolution of transitions in individuality by explicitly registering organisms in cooperating groups that coordinate spatiotemporally to maximize the harvest of a resource.
 Detection of such a transition in DISHTINY is accomplished by identifying resource-sharing and reproductive division of labor among organisms registered to the same cooperating group.
