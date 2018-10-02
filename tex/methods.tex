@@ -124,9 +124,9 @@ If an organism is placing an offspring with identical level-two channel ID but d
 Otherwise, the four possible sites for offspring placement are considered in a random order.
 Initialization and mutation are performed by a draw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
-\subsection{Experiments}
+\subsection{Treatments}
 
-We performed experiments to assess the evolutionary trajectories of populations in DISHTINY.
+Our standard treatment was designed to assess the evolutionary trajectories of populations in DISHTINY.
 We seeded each tile on the $120 \times 120$ toroidal grid with a randomized organism and ran the simulation for 20 million updates.
 In order to facilitate turnover, we culled the population intermittently.
 Starting at update 500,000, and every 50,000 updates thereafter, we randomly selected second-level channel IDs and killed all cells with that channel ID, continuing until at least 5\% of grid tiles were empty.
