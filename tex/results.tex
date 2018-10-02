@@ -88,15 +88,15 @@ For comparison, under the standard treatment the average population mean of $P_2
 We also observed strong selection against direct reproductive competition between channel-mates at update 200,000; all evolved genotypes completely avoided reproducing over level-two channel-mates.
 
 The emergence of resource-sharing and competition avoidance under control conditions suggest kin recognition alone can prompt some aspects of higher-level individuality.
-However, we observed selection against the apoptosis response to mutation, $M_{c}$, under control conditions.
+However, we observed selection \textit{against} the apoptosis response to mutation, $M_{c}$, under control conditions.
 Across 50 replicates of the control treatment, the average population mean value of $M_{c}$ was 0.20 with standard deviation 0.23 --- significantly less than the value $M_{c} = 0.5$ expected without selective pressure against apoptosis response to mutation ($p < 0.0001$, bootstrap test).
-Indeed, population mean $M_{c}$ for control runs was also significantly reduced compared to the standard treatment at time-points matched by absolute elapsed update count ($p < 0.0001$; two-tailed t test) and by approximate elapsed cellular generations ($p < 0.01$; two-tailed t test)
-\footnote{This comparison is affected by missing datafile entries for two standard treatment replicates due to server instability.}.
+Indeed, population mean $M_{c}$ for control runs was also significantly reduced compared to the standard treatment at time-points matched by absolute elapsed update count ($p < 0.0001$; two-tailed t test) and by approximate elapsed cellular generations ($p < 0.01$; two-tailed t test).
+\footnote{This comparison is affected by missing datafile entries for two standard treatment replicates due to server instability.}
 Perhaps under control conditions, the apoptosis response to mutation is disfavored because kin groups stand to lose less from mutant members (i.e., the resource penalty for excessive same-channel network expansion is absent).
 It appears that, at least in our system, kin recognition alone does not suffice to prompt full-fledged fraternal transitions in individuality.
 
 In the absence of resource penalties for erroneous activation under control conditions, we also observed the evolution of larger level-one same-channel groups.
-Compared to the standard treatment, control runs exhibited greater mean level-two same-channel caps $C_2$ at time-points matched by absolute elapsed update count ($p < 0.0001$; two-tailed t test) and approximate elapsed cellular generations ($p < 0.0001$; two-tailed t test)\footnote{This comparison is affected by missing datafile entries for two standard treatment replicates due to server instability.}.
-Even at the 20 million updates mark, when evolution had elapsed around ten times as many cellular generations in the standard treatment compared to the control treatment at update 200,000, mean level-two same-channel caps $C_2$ reached only 262.9 with standard deviation 72.2 under the control treatment.
-This is significantly($p < 0.0001$; two-tailed t test).
-Figure \ref{fig:outcome_control}, which visualizes the comparatively large same-channel level two groups present at the end of a control run.
+Compared to the standard treatment, control runs exhibited greater mean level-two same-channel caps $C_2$ at time-points matched by absolute elapsed update count ($p < 0.0001$; two-tailed t test) and approximate elapsed cellular generations ($p < 0.0001$; two-tailed t test).\footnote{This comparison is affected by missing datafile entries for two standard treatment replicates due to server instability.}
+Even at 20 million updates, when evolution had elapsed around ten times as many cellular generations in the standard treatment compared to the control treatment at update 200,000, mean level-two same-channel caps $C_2$ reached only 262.9 with standard deviation 72.2 under the standard treatment.
+This is significantly smaller than mean $C_2$ under the control treatment at update 200,000 ($p < 0.0001$; two-tailed t test).
+Figure \ref{fig:outcome_control} depicts the comparatively large same-channel level two groups present at the end of a control run.
