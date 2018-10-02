@@ -16,7 +16,7 @@ Second-level allocators form highly regular diamond-shaped level-two signaling n
 Split-allocation individuals exhibit a level-two phenotype of intermediate regularity.
 Figure \ref{fig:grid_progression} shows a time series of signaling network snapshots in an evolutionary run where second-level individuality evolved.
 
-Figure \ref{fig:genotypes} summarizes predominant genotypes observed at the end of our evolutionary simulations.
+Table \ref{table:genotypes} summarizes predominant genotypes observed at the end of our evolutionary simulations.
 All evolved genotypes had $A_2$ fixed at $1.0$.
 So, reproduction over cells sharing the same level-two channel was universally avoided;
 genotypes evolved so that cells declined to reproduce when they were located at the interior of level-two same-channel signaling networks.
@@ -62,7 +62,7 @@ To prevent further evolution, we disabled mutation for these experiments.
 To represent first-level allocators, we selected randomly from the nine pure first-level allocator dominant genotypes we observed.
 To represent the split-level allocators, we selected the single dominant genotype where resource was partitioned exactly evenly between first- and second-level channel pools.
 To represent second-level allocators, we selected the dominant genotype with the largest second-level allocation proportion.
-Figure \ref{fig:genotypes} enumerates the three representative genotypes used.
+Table \ref{table:genotypes} enumerates the three representative genotypes used.
 Figure \ref{fig:eco_progression} shows a time series of signaling network snapshots in an competition experiment run.
 Colonies of each genotype can be seen to grow from each seed and then clash, ultimately yielding a population dominated by second-level allocators.
 
@@ -84,7 +84,7 @@ This result suggests that second-level allocators tend to collect resource more 
 
 Under control conditions, we observed strong selection for high-level resource caching.
 At update 200,000, the average population mean of $P_2$ was 0.96 with standard deviation 0.08.
-For comparison, under the standard treatment the average population mean of $P_2$ was 0.54 with standard deviation 0.11 at a time-point matched by absolute elapsed update count and 0.55 with standard deviation 0.22 at a time-point matched by approximate elapsed cellular generations\footnote{This statistic is affected by missing datafile entries for two standard treatment replicates due to server instability.} (Figure \ref{fig:genotypes}).
+For comparison, under the standard treatment the average population mean of $P_2$ was 0.54 with standard deviation 0.11 at a time-point matched by absolute elapsed update count and 0.55 with standard deviation 0.22 at a time-point matched by approximate elapsed cellular generations\footnote{This statistic is affected by missing datafile entries for two standard treatment replicates due to server instability.} (Table \ref{table:genotypes}).
 We also observed strong selection against direct reproductive competition between channel-mates at update 200,000; all evolved genotypes completely avoided reproducing over level-two channel-mates.
 
 The emergence of resource-sharing and competition avoidance under control conditions suggest kin recognition alone can prompt some aspects of higher-level individuality.
