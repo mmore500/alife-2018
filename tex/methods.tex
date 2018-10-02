@@ -129,24 +129,24 @@ Initialization and mutation are performed by a draw from the distribution $U(-0.
 We performed experiments to assess the evolutionary trajectories of populations in DISHTINY.
 We seeded each tile on the $120 \times 120$ toroidal grid with a randomized organism and ran the simulation for 20 million updates.
 In order to facilitate turnover, we culled the population intermittently.
-Starting at update 500,000, and every 50,000 updates thereafter, we randomly selected Level 2 channel IDs and killed all cells with that channel ID, continuing until at least 5\% of grid tiles were empty.
+Starting at update 500,000, and every 50,000 updates thereafter, we randomly selected second-level channel IDs and killed all cells with that channel ID, continuing until at least 5\% of grid tiles were empty.
 We performed 50 replicates within this treatment.
 On average, each cellular generation took just over 500 updates.
 Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 19.2 with a standard deviation of 2.7 cellular generations per 10,000 updates.
 
-In order to detangle the impact of same-channel signaling networks with respect to kin recognition and with respect to cooperation to increase resource collection rate, we performed control evolutionary trials where same-channel signaling networks did not improve cellular resource collection rate.
+In order to detangle the impact of same-channel signaling networks with respect to kin recognition versus cooperation to increase resource collection rate, we performed control evolutionary trials where same-channel signaling networks did not improve cellular resource collection rate.
 Under control conditions, same-channel signaling networks just helped cells recognize other related cells.
-In our implementation, this treatment corresponded to resource waves with radius 1 (i.e., the resource wave did not expand beyond its seed) that paid out 1.0 resource unit to cells and zero cost for erroneous activation.
+In our implementation, this treatment corresponded to resource waves with radius 1 (i.e., the resource wave did not expand beyond its seed) that paid out 1.0 resource units to cells and no cost for erroneous activation.
 All other aspects of control runs, including the functionality of all lifestyle parameters, were otherwise identical to standard conditions.
 We performed 50 replications of the control treatment.
 In control runs, generations progressed much faster, taking only around 50 updates.
 Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 211.1 with a standard deviation of 43.8 cellular generations per 10,000 updates.
-Higher resource inflow rate under the control conditions likely contributed the faster cellular generation rate compared to the control conditions.
+Higher resource inflow rate under the control conditions likely contributed to the faster cellular generation rate compared to control conditions.
 
 In standard evolutionary runs, we observed a spectrum of evolved resource-caching strategies.
 To assess the relative fitness of these evolved organisms, we ran competitions between the most common genotype from three standard evolutionary runs.
 The first genotype allocated resource exclusively to its first-level same-channel resource pool (i.e., $P_{1} = 1.0$), the second split resource evenly between its first-level and second-level resource pool (i.e., $P_{1} = P_{2} = 0.5$), and the third allocated resource primarily to the second-level resource pool (i.e., $P_{2} > P_{1}$).
-(No most-common genotypes allocated resource exclusively to the second-level resource pool).
+(No most-common genotypes allocated resource exclusively to the second-level resource pool.)
 We seeded each competition with three copies of each genotype, uniformly spaced over the $120 \times 120$ toroidal grid with random arrangement.
 Each competition lasted 2 million updates.
 We performed 50 runs in this experiment.
@@ -156,14 +156,14 @@ We performed 50 runs in this experiment.
 We implemented our experimental system using the Empirical library for scientific software development in C++, available at \url{https://github.com/devosoft/Empirical}.
 
 We performed our computational experiments at the Michigan State University High Performance Computing Center.
-Unfortunately, concurrent efforts to prepare the system for an operating system upgrade caused intermittent disk unavailability and checkpoint-restart failure.
+Unfortunately, efforts to prepare the system for an operating system upgrade caused intermittent disk unavailability and checkpoint-restart failure.
 By cursory inspection of the line count of our most intensively written data files we estimate that 5-10\% of content is missing.
 Lines appear to be missing in contiguous sections (corresponding to contiguous update ranges).
 Except where explicitly noted, missing data is not relevant to our analyses and visualizations, which primarily describe end-states where data from all runs is available.
-Due to checkpoint-restart failures, we curtailed our standard-condition evolutionary runs from a planned 25M to 20M updates and our control evolutionary runs to 250k updates.
+Due to checkpoint-restart failures, we curtailed our standard-condition evolutionary runs from a planned 25 million to 20 million updates and our control evolutionary runs to 250,000 updates.
 
 Each replicate of standard evolutionary experiments required approximately six days of compute time to reach 20 million updates.
-Each replicate of control evolutionary experiments expended on the order of one day of compute time to reach 250 thousand updates.
+Each replicate of control evolutionary experiments expended on the order of one day of compute time to reach 250,000 updates.
 Control runs were slower than standard runs, likely due to a higher per-update cellular generation rate.
 Each replicate of competition experiments consumed approximately ten hours of compute time.
 For standard evolutionary experiments, data processing required approximately four hours of compute time per run.
