@@ -7,12 +7,12 @@ We will first cover the design of the DISHTINY platform and then describe the si
 
 \input{fig/explanatory.tex}
 
-DISHTINY allows cell-like organisms to replicate across a toroidal grid.  As cells reproduce, they can optionally share signaling channels with their offspring.
-Over discrete timesteps (``updates''), the cells can collect a continuous-valued resource, either hoarding it or sharing it with others on a signaling channel.
+DISHTINY allows cell-like organisms to replicate across a toroidal grid.
+Over discrete timesteps (``updates''), the cells can collect a continuous-valued resource.
 Once sufficient resource has been accrued, cells may pay $8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce), replacing any existing cell already there.
+As cells reproduce, they can choose to include offspring in the parent's cooperating ``signaling channel'' group or force offspring to create a new cooperating ``signaling channel'' group.
 
-As shown at the top of Figure \ref{fig:explanatory}, resources appear at a single point and spread in diamond-shaped waves.
-Each update the resource wave advances one grid tile outward, disappearing when it reaches a predefined limit.
+As shown at the top of Figure \ref{fig:explanatory}, resources appear at a single point then spread outwards update-by-update in a diamond-shaped wave, disappearing when the expanding wave reaches a predefined limit.
 Cells must be in a costly ``activated'' state to collect resource as it passes.
 The cell at the starting position of a resource wave is automatically activated, and will send the activate signal to neighboring cells on the same signaling channel.
 The newly activated cells, in turn, activate their own neighbors registered to the same signaling channel.
@@ -28,7 +28,7 @@ Recall, though, that resource waves have a limited extent.
 Cells that activate outside the extent of a resource wave or activate out of sync with the resource wave (due to an indirect path from the cell that originated the signal) pay the activation cost but collect no resource.
 Cells that frequently activate erroneously use up their resource and die.
 In our implementation, organisms that accrue a resource debt of $-11$ or greater are killed.
-This scenario is depicted in Figure \ref{fig:explanatory}$c$.
+This erroneous activation scenario is depicted in Figure \ref{fig:explanatory}$c$.
 
 In this manner, ``Goldilocks'' --- not to small and not too big --- signaling networks are selected for.
 Based on a randomly chosen starting location, resource wave starting points (seeds) are tiled over the toroidal grid such that the extents of the resource waves touch, but do not overlap.
@@ -40,8 +40,6 @@ Cells control the size and shape of their same-channel signaling group through s
 Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or be given a random channel ID (in the range 1 to $2^{22}$).
 No guarantees are made about the uniqueness of a newly-generated channel ID, but chance collisions are rare.
 
-% @CAO: HERE is where we first introduce how multiple channels work; only from here on do we need to worry about talking about "same-channel signaling"
-% @MAM: I think there is some confusion about channel vs. level...
 Hierarchical levels are introduced into the system through multiple separate, but overlaid, instantiations of this resource wave/channel-signaling scheme.
 We refer to each independent resource wave/channel-signaling system as a ``level.''
 In our experiments, we allowed two resource wave/channel-signaling levels, identified here as level one and level two.
@@ -67,18 +65,19 @@ To recognize an evolutionary transition in individuality, we therefore evaluate
 \item Do cells with the same channel ID choose to share resources (e.g., cooperate)?
 \item Is there division of reproductive labor between members of the same channel (e.g., do cells at the interior of a network cede reproduction to those at the periphery?)
 \end{enumerate}
-If these conditions are met among cells sharing the same level-one channel, we can conclude that a first-level transition in individuality has occurred.
-Likewise, if these conditions are met among cells sharing the same level-two channel, we can conclude that a second-level transition in individuality has occurred.
+If these conditions are met among cells sharing the same level-one channel, a first-level transition in individuality may have occurred.
+Likewise, if these conditions are met among cells sharing the same level-two channel, a second-level transition in individuality may have occurred.
+In either case, observation of altruistic behavior, such as an apoptosis response to mutation, would further evidence a transition.
 
 \subsection{Organisms}
 
 We performed our experiments using cell-like organisms composed of 15 floating-point parameters, each controlling a specific strategy component pertinent to transitions in individuality (i.e., reproductive division of labor, resource pooling, apoptosis, propagule generation, and propagule endowment).
-These particular cell-like organisms are in no way inherent to the DISHTINY platform, but were merely developed to study transitions using as simple a models system as feasible.
+These particular cell-like organisms are in no way inherent to the DISHTINY platform, but were merely developed to study transitions using as simple a model system as feasible.
 On reproduction, we applied mutation to each parameter independently with probability $0.00005$.
 
 The \textbf{aversion parameters} ($\bm{A_1}$ and $\bm{A_2}$) allow cells to avoid reproducing over neighbors sharing the same signaling channel.
 Specifically, they control the probability that a cell declines to supplant a neighbor sharing the same level-one ($A_1$) or level-two ($A_2$) channel ID.
-If a cell declines to place its offspring in all four adjoining tiles, it decides not to reproduce.
+If a cell declines to place its offspring in all four adjoining tiles, it does not reproduce.
 Mutation is performed by a redraw from the uniform distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
 The \textbf{resource allocation parameters} control the proportion of resources that go to the cell's stockpile ({$\bm{P_{c}}$), its level-one channel's resource pool ($\bm{P_1}$), or its level-two channel's resource pool ($\bm{P_2}$).
@@ -95,8 +94,8 @@ When an organism reproduces, it checks the size of its level-one signaling netwo
 If neither cap is met or exceeded, then the organism will produce an offspring sharing both of its channel IDs.
 If only the $C_1$ cap is exceeded, then the organism will produce an offspring with new level-one channel ID but identical level-two channel ID.
 Finally, if the $C_2$ cap is exceeded, then the organism will produce an offspring with new IDs for both channels.
-For level 1 caps, these parameters are initialized by a draw from $U(0.0, 16.0)$.
-For level 2 caps, these parameters are initialized by a draw from $U(0.0, 128.0)$.
+For level-one caps, these parameters are initialized by a draw from $U(0.0, 16.0)$.
+For level-two caps, these parameters are initialized by a draw from $U(0.0, 128.0)$.
 Both are mutated by addition of a value drawn from $N(0.0,24.0)$ with the result clamped to be non-negative.
 
 The \textbf{endowment parameters} $\bm{E_{c}}$, $\bm{E_1}$, and $\bm{E_2}$ determine the amount of resource provided to offspring.
@@ -104,9 +103,9 @@ This endowment is paid as an additional cost by the cell stockpile (or same-chan
 The full amount of the received endowment is divided between the daughter cell's stockpile, level-one same-channel resource pool, and level-two same-channel resource pool according to the offspring's resource allocation parameters.
 $\bm{E_{c}}$ is the endowment amount paid to an offspring that shares both channel IDs of the parent;
 $\bm{E_1}$ is the endowment paid to an offspring that shares just the level-two channel ID of the parent;
-and $\bm{E_2}$ is the endowment paid to an offspring that shares neither the level-one nor level-two channel ID of the parent.
+and $\bm{E_2}$ is the endowment paid to an offspring that shares neither the level-one nor the level-two channel ID of the parent.
 Endowed resources help new-channel propagules to rapidly grow their signaling network in order to begin collecting resource at a rate competitive to other well-established same-channel signaling networks.
-In order to provide that adequate resource remained to ensure parental stability, endowment was paid out only after twice the endowment amount had been accrued (leaving an amount of resource equal to the endowment remaining with the parent).
+In order that adequate resource remain to ensure parental stability, endowment was paid out only after twice the endowment amount had been accrued (leaving an amount of resource equal to the endowment remaining with the parent).
 Cell level endowments are initialized by a draw from $U(0.0, 5.0)$.
 Level-one endowments are initialized by a draw from $U(0.0, 80.0)$.
 Level-two endowments are initialized by a draw from $U(0.0,405.0)$.
