@@ -58,6 +58,7 @@ This observation suggests that, although cells do not directly displace their le
 
 Next, we wanted to compare first-, second-, and split-level allocators to determine which genotype was the most fit.
 We ran competition experiments between dominant genotypes from evolutionary runs representative of each of these strategies.
+To prevent further evolution, we disabled mutation for these experiments.
 To represent first-level allocators, we selected randomly from the nine pure first-level allocator dominant genotypes we observed.
 To represent the split-level allocators, we selected the single dominant genotype where resource was partitioned exactly evenly between first- and second-level channel pools.
 To represent second-level allocators, we selected the dominant genotype with the largest second-level allocation proportion.
@@ -66,8 +67,8 @@ Figure \ref{fig:eco_progression} shows a time series of signaling network snapsh
 Colonies of each genotype can be seen to grow from each seed and then clash, ultimately yielding a population dominated by second-level allocators.
 
 Indeed, the second-level resource caching strategy became most abundant in all 50 trials.
-Across the 50 replicates, the second-level resource caching strategy constituted $90.2 \%$, with standard deviation $3.8 \%$, of the competing population of cells.
-In the absence of mutation, second-level individuals tend to exhibit greater fitness than evenly-split-allocation and first-level individuals ($p < 0.0001$; two-tailed exact test).
+Across the 50 replicates, at update 1.5 million (cellular generation 3489 with standard deviation 40) the second-level resource caching strategy constituted $90.2 \%$, with standard deviation $3.8 \%$, of the competing population of cells.
+In the absence of mutation, second-level allocators tend to exhibit greater fitness than split- and first-level allocators ($p < 0.0001$; two-tailed exact test).
 
 
 \input{fig/net_reproduction.tex}
@@ -75,7 +76,7 @@ In the absence of mutation, second-level individuals tend to exhibit greater fit
 In competition experiments, however, higher-level individuals likely benefited from elimination of somatic mutation.
 To assess the relative fitness of first- and second-level individuals without mutation disabled, we examined the relationship between first- and second-level resource pooling and the rate of cellular reproduction at the end of each of the 50 replicate evolutionary trials performed.
 We observed a significant negative correlation between mean $P_1$ and cellular reproduction rate ($p < 0.0001$; bootstrap test; Figure \ref{fig:mean_res_pool1_vs_net_reproduction}) and a significant positive correlation between mean $P_2$ and cellular reproduction rate ($p < 0.0001$; bootstrap test; Figure \ref{fig:mean_res_pool2_vs_net_reproduction}).
-This result suggests that second-level individuals tend to collect resource more effectively than evenly-split-allocation and first-level individuals.
+This result suggests that second-level allocators tend to collect resource more effectively than split- and first-level allocators.
 
 \subsection{Control Evolutionary Experiments}
 
