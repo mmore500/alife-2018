@@ -8,7 +8,7 @@
 
 \input{fig/grid_progression.tex}
 
-A spectrum of resource allocation strategies ranging from purely allocation to level-one same-channel resource pools to primarily allocation to level-two same-channel resource pools were observed at the conclusion of different runs of our evolutionary simulation (mean generation 37,168 with standard deviation 4,684).
+A spectrum of resource allocation strategies ranging from purely allocation to level-one same-channel resource pools to primarily allocation to level-two same-channel resource pools were observed at the conclusion of different runs of our evolutionary simulation (mean cellular generation 37,168 with standard deviation 4,684).
 We interpret these outcomes as ranging between individuality at the level of first-level same-channel groups to individuality at the level of second-level same-channel groups.
 Figure \ref{fig:outcome_grids} shows the level-one and level-two signaling networks at the end of runs where first-, split-, and second-level resource allocation evolved, respectively.
 First-level allocators form somewhat irregular level-two amalgamations of diverse level-one networks.
@@ -16,8 +16,8 @@ Second-level allocators form highly regular diamond-shaped level-two signaling n
 Split-allocation individuals exhibit a level-two phenotype of intermediate regularity.
 Figure \ref{fig:grid_progression} shows a time series of signaling network snapshots in an evolutionary run where second-level individuality evolved.
 
-Table \ref{table:genotypes} summarizes predominant genotypes observed at the end of our evolutionary simulations.
-All evolved genotypes had $A_2$ fixed at $1.0$.
+Table \ref{table:genotypes} summarizes most-common genotypes observed at the end of our evolutionary simulations.
+In the standard treatment, all evolved genotypes had $A_2$ fixed at $1.0$.
 So, reproduction over cells sharing the same level-two channel was universally avoided;
 genotypes evolved so that cells declined to reproduce when they were located at the interior of level-two same-channel signaling networks.
 
@@ -82,21 +82,25 @@ This result suggests that second-level allocators tend to collect resource more 
 
 \input{fig/outcome_control.tex}
 
-Under control conditions, we observed strong selection for high-level resource caching.
-At update 200,000, the average population mean of $P_2$ was 0.96 with standard deviation 0.08.
-For comparison, under the standard treatment the average population mean of $P_2$ was 0.54 with standard deviation 0.11 at a time-point matched by absolute elapsed update count and 0.55 with standard deviation 0.22 at a time-point matched by approximate elapsed cellular generations\footnote{This statistic is affected by missing datafile entries for two standard treatment replicates due to server instability.} (Table \ref{table:genotypes}).
-We also observed strong selection against direct reproductive competition between channel-mates at update 200,000; all evolved genotypes completely avoided reproducing over level-two channel-mates.
+Under control conditions where resource was distributed evenly to all cells regardless of same-channel group configuration, split-level resource caching also evolved.
+Split-level allocation was the most common strategy at update 3 million in all replicates.
+Strategies where resource was primarily, but not entirely, cached in an organism's level-one signaling network pool (i.e., $1.0 > P_1 > P_2$) were most-abundant at the end of 33 evolutionary runs and strategies where resource was primarily, but not entirely, cached in an organism's level-two signaling network pool (i.e., $1.0 > P_2 > P_1$) were most-abundant at the end of 17 evolutionary runs.
+As shown in Table \ref{table:genotypes}, the average population mean of $P_1$ is greater in the control treatment than in the standard treatment at time-points matched by absolute elapsed update count and approximate elapsed cellular generations, but this difference is not statistically significant.
 
-The emergence of resource-sharing and competition avoidance under control conditions suggest kin recognition alone can prompt some aspects of higher-level individuality.
+Consistent with the standard treatment, we observed strong selection against direct reproductive competition between channel-mates at update 3 million in the control treatment.
+Nearly all most-common genotypes completely avoided reproducing over level-two channel-mates (i.e., $A_2 = 1.0$), except for a single most-common genotype where a very slim probability of reproducing over level-two channel-mates was allowed ($A_2 = 0.996$).
+
+The emergence of resource-sharing and competition avoidance under control conditions suggests kin recognition alone can prompt some aspects of higher-level individuality.
 However, we observed selection \textit{against} the apoptosis response to mutation, $M_{c}$, under control conditions.
-Across 50 replicates of the control treatment, the average population mean value of $M_{c}$ was 0.20 with standard deviation 0.23 --- significantly less than the value $M_{c} = 0.5$ expected without selective pressure against apoptosis response to mutation ($p < 0.0001$, bootstrap test).
-Indeed, population mean $M_{c}$ for control runs was also significantly reduced compared to the standard treatment at time-points matched by absolute elapsed update count ($p < 0.0001$; two-tailed t test) and by approximate elapsed cellular generations ($p < 0.01$; two-tailed t test).
-\footnote{This comparison is affected by missing datafile entries for two standard treatment replicates due to server instability.}
+Across 50 replicates of the control treatment, the average population mean value of $M_{c}$ was 0.18 with standard deviation 0.23 --- significantly less than the value $M_{c} = 0.5$ expected without selective pressure against apoptosis response to mutation ($p < 0.0001$, two-tailed t test).
+Indeed, population mean $M_{c}$ for control runs was also significantly reduced compared to the standard treatment at time-points matched by absolute elapsed update count ($p < 0.001$; two-tailed t test) and by approximate elapsed cellular generations ($p < 0.001$; two-tailed t test).
 Perhaps under control conditions, the apoptosis response to mutation is disfavored because kin groups stand to lose less from mutant members (i.e., the resource penalty for excessive same-channel network expansion is absent).
 It appears that, at least in our system, kin recognition alone does not suffice to prompt full-fledged fraternal transitions in individuality.
 
-In the absence of resource penalties for erroneous activation under control conditions, we also observed the evolution of larger level-one same-channel groups.
-Compared to the standard treatment, control runs exhibited greater mean level-two same-channel caps $C_2$ at time-points matched by absolute elapsed update count ($p < 0.0001$; two-tailed t test) and approximate elapsed cellular generations ($p < 0.0001$; two-tailed t test).\footnote{This comparison is affected by missing datafile entries for two standard treatment replicates due to server instability.}
-Even at 20 million updates, when evolution had elapsed around ten times as many cellular generations in the standard treatment compared to the control treatment at update 200,000, mean level-two same-channel caps $C_2$ reached only 262.9 with standard deviation 72.2 under the standard treatment.
-This is significantly smaller than mean $C_2$ under the control treatment at update 200,000 ($p < 0.0001$; two-tailed t test).
+In the absence of resource penalties for erroneous activation under control conditions, we also observed the evolution of larger same-channel groups.
+At update 3 million, most-common genotypes encoded a level-two same-channel cap $C_2$ of 484.0 cells with standard deviation of 123.5.
+Compared to the standard treatment, control runs exhibited larger mean level-two same-channel caps $C_2$ at time-points matched by absolute elapsed update count ($p < 0.0001$; two-tailed t test) and approximate elapsed cellular generations ($p < 0.0001$; two-tailed t test).
+Even at 20 million updates, when evolution had elapsed around six times as many cellular generations in the standard treatment compared to the control treatment at update 3 million, mean level-two same-channel caps $C_2$ reached only 262.9 with standard deviation 72.2 under the standard treatment.
+This is significantly smaller than mean $C_2$ under the control treatment at update 3 million ($p < 0.0001$; two-tailed t test).
 Figure \ref{fig:outcome_control} depicts the comparatively large same-channel level two groups present at the end of a control run.
+Table \ref{table:genotypes} summarizes most-common genotypes observed under the control treatment.
