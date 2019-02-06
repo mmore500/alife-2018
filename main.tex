@@ -1,6 +1,12 @@
 \documentclass[letterpaper]{article}
 
-\usepackage{natbib,alifeconf}  %% The order is important
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\usepackage[sort,square,numbers]{natbib}  %% The order is important
+
+% \usepackage{alifeconf}
+\usepackage{rotating}
 
 \usepackage{hyperref}
 
@@ -93,8 +99,7 @@ mmore500@msu.edu} % email of corresponding author
 
 \input{tex/acknowledgements.tex}
 
-\footnotesize
-\bibliographystyle{apalike}
+\bibliographystyle{apa-good}
 \bibliography{bibl} % replace by the name of your .bib file
 
 
