@@ -72,3 +72,4 @@ cleaner:
 	rm -f moreno.pdf
 	rm -f coverpage.pdf
 	rm -f moreno.tar.gz
+	rm -f moreno.tex
