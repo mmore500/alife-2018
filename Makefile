@@ -28,8 +28,6 @@ coverpage.pdf: coverpage.md
 moreno.tex: main.tex
 	perl latexpand.pl main.tex > moreno.tex
 
-<<<<<<< Updated upstream
-=======
 moreno.pdf: coverpage.pdf ${BUILD_DIR}.pdf figure_appendix.pdf
 	pdftk coverpage.pdf ${BUILD_DIR}.pdf figure_appendix.pdf cat output moreno.pdf
 
@@ -62,7 +60,6 @@ moreno.tar.gz: moreno.pdf moreno.tex
 	tar -cvzf moreno.tar.gz temp && \
 	rm -r temp
 
->>>>>>> Stashed changes
 clean:
 	rm -f ${BUILD_DIR}.pdf
 	rm -f ${BUILD_DIR}-draft.pdf
@@ -71,10 +68,7 @@ cleaner:
 	latexmk -CA
 	# remove auxillary files, excepting .tex and .bib files
 	find . -type f -name ${BUILD_DIR}"*" ! -name '*.tex' ! -name '*.bib' -delete
-<<<<<<< Updated upstream
-=======
 	rm -f coverpage.pdf
 	rm -f moreno.pdf
 	rm -f coverpage.pdf
 	rm -f moreno.tar.gz
->>>>>>> Stashed changes
