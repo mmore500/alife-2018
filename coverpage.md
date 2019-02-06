@@ -38,7 +38,9 @@ During evolution, we observe reproductive division of labor and close cooperatio
 Many replicate populations evolved to direct their resources toward low-level groups (behaving like multi-cellular individuals) and many others evolved to direct their resources toward high-level groups (acting as larger-scale multi-cellular individuals).
 
 # Keywords
-* evolution
 * open-ended evolution
 * major transitions in evolution
+* fraternal transitions
 * multicellularity
+* cooperation
+* evolutionary dynamics
