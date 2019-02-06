@@ -17,6 +17,9 @@ ${BUILD_DIR}-draft.pdf: main.tex
     -jobname=${BUILD_DIR}-draft \
     -pdflatex="pdflatex -interaction=nonstopmode" draft.tex
 
+coverpage.pdf: coverpage.md
+	pandoc coverpage.md -f commonmark -o coverpage.pdf
+
 clean:
 	rm -f ${BUILD_DIR}.pdf
 	rm -f ${BUILD_DIR}-draft.pdf
