@@ -17,6 +17,11 @@ ${BUILD_DIR}-draft.pdf: main.tex
     -jobname=${BUILD_DIR}-draft \
     -pdflatex="pdflatex -interaction=nonstopmode" draft.tex
 
+figure_appendix.pdf: figure_appendix.tex
+	latexmk -pdf -silent \
+		-jobname=figure_appendix \
+		-pdflatex="pdflatex -interaction=nonstopmode" figure_appendix.tex
+
 coverpage.pdf: coverpage.md
 	pandoc coverpage.md -f commonmark -o coverpage.pdf
 
