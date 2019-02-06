@@ -20,6 +20,9 @@ ${BUILD_DIR}-draft.pdf: main.tex
 coverpage.pdf: coverpage.md
 	pandoc coverpage.md -f commonmark -o coverpage.pdf
 
+moreno.tex: main.tex
+	perl latexpand.pl main.tex > moreno.tex
+
 clean:
 	rm -f ${BUILD_DIR}.pdf
 	rm -f ${BUILD_DIR}-draft.pdf
