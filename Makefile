@@ -31,7 +31,7 @@ moreno.tex: main.tex
 moreno.pdf: coverpage.pdf ${BUILD_DIR}.pdf figure_appendix.pdf
 	pdftk coverpage.pdf ${BUILD_DIR}.pdf figure_appendix.pdf cat output moreno.pdf
 
-moreno.tar.gz: moreno.pdf moreno.tex
+moreno.zip: moreno.pdf moreno.tex
 	mkdir -p temp && \
 	cp moreno.pdf temp && \
 	cp moreno.tex temp && \
@@ -57,7 +57,7 @@ moreno.tar.gz: moreno.pdf moreno.tex
 	pdftops img/mean_res_pool2_vs_net_reproduction.pdf temp/moreno.fig6b.eps && \
 	pdftops img/ChannelMap_1018_update3000000.pdf temp/moreno.fig7.eps && \
 	cp bibl.bib temp/moreno.bib && \
-	tar -cvzf moreno.tar.gz temp && \
+	zip -r moreno.zip temp && \
 	rm -r temp
 
 clean:
@@ -71,5 +71,5 @@ cleaner:
 	rm -f coverpage.pdf
 	rm -f moreno.pdf
 	rm -f coverpage.pdf
-	rm -f moreno.tar.gz
+	rm -f moreno.zip
 	rm -f moreno.tex
