@@ -8,4 +8,4 @@ data, tutorials, and software @ [https://osf.io/ewvg8/](https://osf.io/ewvg8/)
 
 Matthew Andres Moreno
 
-`matthew.andres.moreno@gmail.com`
+`m.more500@gmail.com`
